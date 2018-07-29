@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="HomeApp">
 <head>
  
 
@@ -16,6 +16,7 @@
     <!-- Bootstrap -->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">-->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -61,20 +62,15 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">LogIn</a></li>
-        <li><a href="#">Sign Up</a></li>
+        <li><a href="#">כניסה</a></li>
+        <li><a href="#">הרשמה</a></li>
       </ul>
     </div>
   </div>
 </nav>
+<ng-view></ng-view>
 
-<!-- First Container -->
-<div class="container-fluid bg-1 text-center">
-  <h1 class="margin">...ניהול ועד בית - יותר פשוט ממה שחשבת</h1>
-  <img src="http://res.cloudinary.com/monthli/image/upload/q_40/v1458015093/monthli_www/south_san_jose_large_cropped.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="900" height="900">
-<h3>אב-בית" מספקת את כל השירותים לניהול ועד ושירותי אחזקה כוללים של הבניין"</h3>
-<h3>.ומציגה את הפתרון האידיאלי לניהול ועד בית אמין הנתון לביקורת היומיומית של הדיירים</h3>
-</div>
+
 
 
 
