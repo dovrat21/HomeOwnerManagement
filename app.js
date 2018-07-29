@@ -8,10 +8,10 @@ app.config(function($routeProvider) {
     templateUrl: 'home.html',
    
   })
-//   .when('/actors', {
-//     templateUrl: 'Actor/actors.html',
-//     controller: 'actorCtrl'
-//   })
+  .when('/signUp', {
+    templateUrl: 'signUp/signUp.html',
+    controller: 'signUpCtrl'
+  })
 //   .when('/movies', {
 //     templateUrl: 'Movies/movies.html',
 //     controller: 'movieCtrl'
