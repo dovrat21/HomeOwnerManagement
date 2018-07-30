@@ -52,7 +52,7 @@ app.factory("userService", function($http, $log, $q) {
       // user.isManager= users.length==0? true: false;
       // var user = new User(user.first_name, user.last_name, user.email, user.city, user.street, user.house_number, user.password, user.password_confirmation, user.isManager);
       // users.push(user)
-      var userUrl="https://my-homeowner-db.herokuapp.com/users";
+      var userUrl="https://my-homeownre-db.herokuapp.com/users";
       $http.post(userUrl,user).then( function(data,status) {
         alert("Data: " + data + "\nStatus: " + status);
         var user = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.password, data.data.password_confirmation, data.data.isManager);
