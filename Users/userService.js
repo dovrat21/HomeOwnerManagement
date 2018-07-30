@@ -3,7 +3,8 @@ app.factory("userService", function($http, $log, $q) {
      
     var users = [];
   
-    function User(first_name, last_name, email, city , street, house_number, password, password_confirmation, isManager ) {
+    function User(id,first_name, last_name, email, city , street, house_number, password, password_confirmation, isManager ) {
+      this.id=id;
       this.first_name = first_name;
       this.last_namel = last_name;
       this.email = email;
@@ -48,21 +49,22 @@ app.factory("userService", function($http, $log, $q) {
     function addUser(user) {
        var async = $q.defer();
   
-      user.isManager= users.length==0? true: false;
-      var user = new User(user.first_name, user.last_name, user.email, user.city, user.street, user.house_number, user.password, user.password_confirmation, user.isManager);
-      users.push(user)
-    //   $http.post(userUrl).then(function(response) {
-    //     var user = new User(user.first_name, user.last_name, user.email, user.city, user.street, user.house_number, user.password, user.password_confirmation, user.isManager);
+      // user.isManager= users.length==0? true: false;
+      // var user = new User(user.first_name, user.last_name, user.email, user.city, user.street, user.house_number, user.password, user.password_confirmation, user.isManager);
+      // users.push(user)
+      var userUrl="https://my-homeowner-db.herokuapp.com/users";
+      $http.post(userUrl,user).then( function(data,status) {
+        alert("Data: " + data + "\nStatus: " + status);
+        var user = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.password, data.data.password_confirmation, data.data.isManager);
+        users.push(user);
+        async.resolve(users);
+      }, function(error) {
+        console.error(error);
+        async.reject("failed to load cars.json");
+      });
   
-    //     users.push(user);
-    //     async.resolve(users);
-    //   }, function(error) {
-    //     console.error(error);
-    //     async.reject("failed to load cars.json");
-    //   });
-  
-    //   return async.promise;
-    return users;
+      return async.promise;
+    
   
     }
   

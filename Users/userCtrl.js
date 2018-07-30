@@ -1,5 +1,5 @@
 
-app.controller("userCtrl", function($scope, $http, userService) {
+app.controller("userCtrl", function($scope, $http, $location, userService) {
 
 
      
@@ -15,8 +15,8 @@ app.controller("userCtrl", function($scope, $http, userService) {
     $scope.addUser = function(user) {
       userService.addUser(user).then(function(users) {
         $scope.users = users;
-        $window.location.href = 'Users/addAllTenants.html';
-       
+        $location.path('/addAllTenants')
+              
       }, function(error) {
         $log.error(error);
       });
