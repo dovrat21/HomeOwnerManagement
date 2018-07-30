@@ -15,6 +15,8 @@ app.controller("userCtrl", function($scope, $http, userService) {
     $scope.addUser = function(user) {
       userService.addUser(user).then(function(users) {
         $scope.users = users;
+        $window.location.href = 'Users/addAllTenants.html';
+       
       }, function(error) {
         $log.error(error);
       });

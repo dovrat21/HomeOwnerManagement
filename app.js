@@ -12,10 +12,10 @@ app.config(function($routeProvider) {
     templateUrl: 'Users/signUp.html',
     controller: 'userCtrl'
   })
-//   .when('/movies', {
-//     templateUrl: 'Movies/movies.html',
-//     controller: 'movieCtrl'
-//   })
+  .when('/addAllTenants', {
+    templateUrl: 'Users/addAllTenants.html',
+    
+  })
 //      .when('/movies/:movieId', {
 //     templateUrl: 'Movies/movieDetail.html',
 //     controller: 'movieDetailsCtrl'
