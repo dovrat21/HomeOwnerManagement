@@ -1,23 +1,26 @@
 
-app.controller("userCtrl", function($scope, $http, $location, userService) {
+app.controller("userCtrl", function($scope, $rootScope, $http, $location, userService) {
 
 
      
     $scope.users = [];
-    // userService.getAll().then(function(users) {
-    //   $scope.users = users;
+    userService.getAll().then(function(users) {
+      $scope.users = users;
   
-    // }, function(error) {
-    //   $log.error(error);
-    // })
+    }, function(error) {
+      $log.error(error);
+    })
   
-  
-    $scope.addUser = function(user) {
+  $scope.currentuser=$scope.users[0];
+
+ 
+   
+  $scope.addUser = function(user) {
       userService.addUser(user).then(function(users) {
         $scope.users = users;
-        $location.path('/addAllTenants')
-              
-      }, function(error) {
+        $location.path('/personalPage');
+        getAll(); 
+           }, function(error) {
         $log.error(error);
       });
   

@@ -12,8 +12,9 @@ app.config(function($routeProvider) {
     templateUrl: 'Users/signUp.html',
     controller: 'userCtrl'
   })
-  .when('/addAllTenants', {
-    templateUrl: 'Users/addAllTenants.html',
+  .when('/personalPage', {
+    templateUrl: 'Users/personalPage.html',
+    controller: 'userCtrl'
     
   })
 //      .when('/movies/:movieId', {
