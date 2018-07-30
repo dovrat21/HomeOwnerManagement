@@ -1,4 +1,32 @@
-$(function () {
+
+app.controller("userCtrl", function($scope, $http, userService) {
+
+
+     
+    $scope.users = [];
+    // userService.getAll().then(function(users) {
+    //   $scope.users = users;
+  
+    // }, function(error) {
+    //   $log.error(error);
+    // })
+  
+  
+    $scope.addUser = function(user) {
+      userService.addUser(user).then(function(users) {
+        $scope.users = users;
+      }, function(error) {
+        $log.error(error);
+      });
+  
+      $scope.searchText = "";
+      $scope.searchResults = [];
+  
+  
+    };
+  
+
+    $(function () {
     $('.button-checkbox').each(function () {
 
         // Settings
@@ -63,3 +91,7 @@ $(function () {
         init();
     });
 });
+  
+  });
+
+

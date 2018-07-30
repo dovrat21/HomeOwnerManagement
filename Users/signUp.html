@@ -1,9 +1,5 @@
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
-
-<div class="container" ng-controller="signUpCtrl">
+<div class="container" ng-controller="userCtrl">
 
 <div class="row">
    
@@ -14,31 +10,37 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="שם פרטי" tabindex="1">
+                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" ng-model="user.first_name" placeholder="שם פרטי" tabindex="1">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="שם משפחה" tabindex="2">
+						<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="שם משפחה" ng-model="user.last_name" tabindex="2">
 					</div>
 				</div>
             </div>
             <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="כתובת דוא''ל" tabindex="4">
+                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="כתובת דוא''ל" ng-model="user.email" tabindex="3">
                 </div>
 			<div class="form-group">
-				<input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="כתובת הנכס המשותף" tabindex="3">
+				<input type="text" name="city" id="citye" class="form-control input-lg" placeholder="עיר"  ng-model="user.city" tabindex="4">
+			</div>
+			<div class="form-group">
+				<input type="text" name="street" id="street" class="form-control input-lg" placeholder="רחוב"  ng-model="user.street" tabindex="5">
+			</div>
+			<div class="form-group">
+				<input type="text" name="house_number" id="house_number" class="form-control input-lg" placeholder="מספר בית"  ng-model="user.house_number" tabindex="6">
 			</div>
 			
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" tabindex="5">
+						<input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" ng-model="user.password" tabindex="7">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">
-						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה" tabindex="6">
+						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה" ng-model="user.password_confirmation" tabindex="8">
 					</div>
 				</div>
 			</div>
@@ -57,7 +59,7 @@
 			<hr class="colorgraph">
 			<div class="row">
 				<!-- <div class="col-xs-12 col-md-12"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div> -->
-				<div class="col-xs-12 col-md-12"><a href="#" class="btn btn-success btn-block btn-lg">צור חשבון</a></div>
+				<div class="col-xs-12 col-md-12"><a href="#" class="btn btn-success btn-block btn-lg"  ng-click="addUser(user)" >צור חשבון</a></div>
 			</div>
 		</form>
 	</div>
