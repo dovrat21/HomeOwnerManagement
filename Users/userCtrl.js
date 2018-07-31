@@ -2,8 +2,10 @@
 app.controller("userCtrl", function($scope, $rootScope, $http, $location, userService) {
 
 
-     
+    
     $scope.users = [];
+    $scope.isLoggedIn=false;
+   
     userService.getAll().then(function(users) {
       $scope.users = users;
   
@@ -11,21 +13,26 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
       $log.error(error);
     })
   
-  $scope.currentuser=$scope.users[0];
+//   $scope.currentuser=$scope.users[0];
 
  
    
   $scope.addUser = function(user) {
       userService.addUser(user).then(function(users) {
         $scope.users = users;
-        $location.path('/personalPage');
-        getAll(); 
-           }, function(error) {
+        $scope.isLoggedIn=true;
+        alert($scope.isLoggedIn);
+        $location.path('/');
+
+        alert($scope.isLoggedIn);
+        $scope.isLoggedIn=true;
+                 }, function(error) {
         $log.error(error);
       });
   
       $scope.searchText = "";
       $scope.searchResults = [];
+      $scope.isLoggedIn=true;
   
   
     };

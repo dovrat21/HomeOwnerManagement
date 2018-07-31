@@ -49,13 +49,13 @@ app.factory("userService", function($http, $log, $q) {
     function addUser(user) {
        var async = $q.defer();
   
-      // user.isManager= users.length==0? true: false;
-      // var user = new User(user.first_name, user.last_name, user.email, user.city, user.street, user.house_number, user.password, user.password_confirmation, user.isManager);
-      // users.push(user)
+      user.isManager= users.length==0? true: false;
+     
       
       $http.post(userUrl,user).then( function(data,status) {
         
         var user = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.password, data.data.password_confirmation, data.data.isManager);
+        user.isManager= users.length===0? true: false;
         users.push(user);
         async.resolve(users);
       }, function(error) {

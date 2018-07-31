@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="HomeApp">
+<html lang="en" ng-app="HomeApp" ng-controller="userCtrl">
 <head>
  
 
@@ -30,6 +30,7 @@
 
     <script src="Users/userCtrl.js"></script>
     <script src="Users/userService.js"></script>
+    <script src="Users/tenantDirective.js"></script>
 
 
     <link rel="stylesheet" href="style.css">
@@ -54,11 +55,80 @@
  
 </head>
 <body>
+    <div class="row">
+        <div class="col-md-9">
+            <ng-view></ng-view>
+           </div>
+    <div class="col-md-3" >
+        <div class="profile-sidebar">
+            <h3 style="color:black">{{isLoggedIn}}</h3>
+         
+          <div class="profile-userpic" ng-show="isLoggedIn" >
+            <img src="https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-resume/master/img/profile.jpg" class="img-responsive" alt="">
+          </div>
+         
+          <div class="profile-usertitle" ng-show="true">
+            <div>
+             {{currentuser}}
+            </div>
+            <div>
+              {{users[0].first_name + " "  + users[0].last_name}}
+             </div>
+           
+          </div>
+         
+          <!-- <div class="profile-userbuttons">
+            <button type="button"  class="btn btn-success btn-sm">Follow</button>
+            <button type="button" class="btn btn-danger btn-sm">Message</button>
+          </div> -->
+         
+          <div class="profile-usermenu">
+            <ul class="nav" ng-hide="isLoggedIn" >
+              <li class="active">
+                  <a href="#!/signUp">
+                    <i class="fas fa-sign-in-alt"></i>
+                רישום</a>
+              </li>
+              <li>
+                <a href="#!/login">
+                <i class="glyphicon glyphicon-user"></i>
+                כניסה </a>
+              </li>
+             
+            </ul>
+            <ul class="nav" ng-show="true">
+                <li class="active">
+                  <a href="#!/signUp">
+                      <i class="fas fa-user-plus"></i>
+                  הוספת דייר </a>
+                </li>
+                <li>
+                  <a href="#">
+                  <i class="glyphicon glyphicon-user"></i>
+                  {{isLoggedIn}} </a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">
+                  <i class="glyphicon glyphicon-ok"></i>
+                  Tasks </a>
+                </li>
+                <li>
+                  <a href="#">
+                  <i class="glyphicon glyphicon-flag"></i>
+                  Help </a>
+                </li>
+              </ul>
+          </div>
+          <!-- END MENU -->
+        </div>
+      </div>
+      
+    </div>
+     
 
 
-<!-- Navbar -->
 
-<ng-view></ng-view>
+
 
 
 
