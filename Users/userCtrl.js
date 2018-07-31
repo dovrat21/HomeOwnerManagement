@@ -1,11 +1,12 @@
 
-app.controller("userCtrl", function($scope, $rootScope, $http, $location, userService) {
+app.controller("userCtrl", function($scope, $rootScope, $http, $location, userService ) {
 
 
     
     $scope.users = [];
+    $scope.invalidLogin = false;
     $scope.isLoggedIn=false;
-   
+   $scope.currentUser=null;
     userService.getAll().then(function(users) {
       $scope.users = users;
   
@@ -15,7 +16,39 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
   
 //   $scope.currentuser=$scope.users[0];
 
- 
+
+
+ $scope.login = function(user){
+    $scope.invalidLogin = false;
+    userService.getAll().then(function(users) {
+        $scope.users = users;
+        var tenantList1 = users.filter(person => person.email === user.email);
+        var tenantList2 = users.filter(person => person.password === user.password);
+     
+       if (tenantList2.length>0)
+       {
+           $scope.currentUser=user;
+           $scope.invalidLogin = true;
+           $location.path('/');
+
+       }
+       else
+       {
+           alert($scope.invalidLogin);
+           $scope.invalidLogin = true;
+        // $("#myModal").modal('show');
+
+       }
+    
+      }, function(error) {
+        $scope.invalidLogin = true;
+        // $scope.invalidLogin = false;
+        $log.error(error);
+      })
+     
+
+
+ };
    
   $scope.addUser = function(user) {
       userService.addUser(user).then(function(users) {
