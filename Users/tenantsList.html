@@ -1,0 +1,30 @@
+
+ 
+    <div class="container">
+   
+           
+        <!-- <select ng-model="query" ng-options="x for x in dogsType"></select> -->
+        
+            <div class="row">
+                   <div id="accordion"  > 
+              <div class="col-sm-6 col-lg-3 my-2"  ng-repeat="user in users">
+                    <div class="card">
+                            <div class="card-header" id="headingOne">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#{{user.id}}"  aria-expanded="true" aria-controls="collapseOne">
+                                 {{user.first_name + " " + user.last_name}} 
+                                </button>
+                              </h5>
+                            </div>
+                        
+                            <div id="{{user.id}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                               {{user.email}}
+                              </div>
+                            </div>
+                          </div>
+                  
+              </div>
+            </div>
+            </div>
+          </div>

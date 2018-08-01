@@ -1,26 +1,26 @@
 var app = angular.module("HomeApp", ["ngRoute"]);
-
+// var app = angular.module("HomeApp", ["ngRoute",'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 
 app.config(function($routeProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'home.html',
-    controller: 'userCtrl'
-   
+    controller: 'menuCtrl'
+      
   })
   .when('/signUp', {
-    templateUrl: 'Users/signUp.html',
-    controller: 'userCtrl'
+    templateUrl: 'Login/signUp.html',
+    controller: 'loginCtrl'
   })
-  .when('/personalPage', {
-    templateUrl: 'Users/personalPage.html',
+  .when('/tenantsList', {
+    templateUrl: 'Users/tenantsList.html',
     controller: 'userCtrl'
     
   })
   .when('/login', {
-    templateUrl: 'Users/login.html',
-    controller: 'userCtrl'
+    templateUrl: 'Login/login.html',
+    controller: 'loginCtrl'
     
   })
 //      .when('/movies/:movieId', {

@@ -13,63 +13,33 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
     }, function(error) {
       $log.error(error);
     })
-  
-//   $scope.currentuser=$scope.users[0];
-
-
-
- $scope.login = function(user){
-    $scope.invalidLogin = false;
-    userService.getAll().then(function(users) {
-        $scope.users = users;
-        var tenantList1 = users.filter(person => person.email === user.email);
-        var tenantList2 = users.filter(person => person.password === user.password);
-     
-       if (tenantList2.length>0)
-       {
-           $scope.currentUser=user;
-           $scope.invalidLogin = true;
-           $location.path('/');
-
-       }
-       else
-       {
-           alert($scope.invalidLogin);
-           $scope.invalidLogin = true;
-        // $("#myModal").modal('show');
-
-       }
     
-      }, function(error) {
-        $scope.invalidLogin = true;
-        // $scope.invalidLogin = false;
-        $log.error(error);
-      })
-     
+    $scope.oneAtATime = true;
 
+  $scope.groups = [
+    {
+      title: 'Dynamic Group Header - 1',
+      content: 'Dynamic Group Body - 1'
+    },
+    {
+      title: 'Dynamic Group Header - 2',
+      content: 'Dynamic Group Body - 2'
+    }
+  ];
 
- };
-   
-  $scope.addUser = function(user) {
-      userService.addUser(user).then(function(users) {
-        $scope.users = users;
-        $scope.isLoggedIn=true;
-        alert($scope.isLoggedIn);
-        $location.path('/');
+  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
 
-        alert($scope.isLoggedIn);
-        $scope.isLoggedIn=true;
-                 }, function(error) {
-        $log.error(error);
-      });
-  
-      $scope.searchText = "";
-      $scope.searchResults = [];
-      $scope.isLoggedIn=true;
-  
-  
-    };
-  
+  $scope.addItem = function() {
+    var newItemNo = $scope.items.length + 1;
+    $scope.items.push('Item ' + newItemNo);
+  };
+
+  $scope.status = {
+    isCustomHeaderOpen: false,
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
+
 
     $(function () {
     $('.button-checkbox').each(function () {

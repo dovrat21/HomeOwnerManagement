@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="HomeApp" ng-controller="userCtrl" >
+<html lang="en" ng-app="HomeApp" >
 <head>
  
 
@@ -14,8 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
     <!-- Bootstrap -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">-->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
    <script src="app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -24,11 +24,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+
+
+
+
   
 
     <script src="Users/userCtrl.js"></script>
+    <script src="Menu/menuCtrl.js"></script>
     <script src="Users/userService.js"></script>
-    <script src="Users/tenantDirective.js"></script>
+    <script src="Login/loginCtrl.js"></script>
+    <script src="Login/tenantDirective.js"></script>
 
 
     <link rel="stylesheet" href="style.css">
@@ -59,18 +71,17 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-md-9">
-            <ng-view></ng-view>
-           </div>
-    <div class="col-md-3" >
+        <h1>{{invalidLogin}}</h1>
+      
+    <div class="col-md-3" ng-controller="menuCtrl" >
         <div class="profile-sidebar">
-            <h3 style="color:black">{{isLoggedIn}}</h3>
+          
          
-          <div class="profile-userpic" ng-show="isLoggedIn" >
+          <div class="profile-userpic" ng-show="invalidLogin" >
             <img src="https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-resume/master/img/profile.jpg" class="img-responsive" alt="">
           </div>
          
-          <div class="profile-usertitle" ng-show="true">
+          <div class="profile-usertitle" ng-show="invalidLogin">
             <div>
              {{currentuser}}
             </div>
@@ -80,17 +91,13 @@
            
           </div>
          
-          <!-- <div class="profile-userbuttons">
-            <button type="button"  class="btn btn-success btn-sm">Follow</button>
-            <button type="button" class="btn btn-danger btn-sm">Message</button>
-          </div> -->
          
           <div class="profile-usermenu">
-            <ul class="nav" ng-hide="isLoggedIn" >
+            <ul class="nav" ng-hide="isUserLoggedIn()" >
               <li class="active">
                   <a href="#!/signUp">
                     <i class="fas fa-sign-in-alt"></i>
-                רישום</a>
+                רישום </a>
               </li>
               <li>
                 <a href="#!/login">
@@ -99,16 +106,16 @@
               </li>
              
             </ul>
-            <ul class="nav" ng-show="true">
+            <ul class="nav" ng-show="isUserLoggedIn()">
                 <li class="active">
                   <a href="#!/signUp">
                       <i class="fas fa-user-plus"></i>
                   הוספת דייר </a>
                 </li>
                 <li>
-                  <a href="#">
-                  <i class="glyphicon glyphicon-user"></i>
-                  {{isLoggedIn}} </a>
+                    <a href="#!/tenantsList">
+                      <i class="fas fa-list-ol"></i>
+                  רשימת דיירים </a>
                 </li>
                 <li>
                   <a href="#" target="_blank">
@@ -122,9 +129,12 @@
                 </li>
               </ul>
           </div>
-          <!-- END MENU -->
+        
         </div>
       </div>
+      <div class="col-md-9">
+          <ng-view></ng-view>
+         </div>
       
     </div>
      

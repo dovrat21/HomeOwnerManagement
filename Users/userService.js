@@ -1,6 +1,6 @@
 app.factory("userService", function($http, $log, $q) {
 
-     
+  var activeUser = null;
     var users = [];
     var userUrl="https://my-homeownre-db.herokuapp.com/users";
   
@@ -28,6 +28,20 @@ app.factory("userService", function($http, $log, $q) {
 //           $log.error(error);
 //         });
     // This function loads all the actors into the actors array
+
+
+    function isLoggedIn() {
+      return activeUser ? true : false;
+  }
+
+  function logout() {
+      activeUser = null;
+  }
+
+ function getActiveUser(){
+   return activeUser;
+ }
+
     function getAll() {
         var async = $q.defer();
     $http.get(userUrl).then(function(response) {
@@ -44,12 +58,29 @@ app.factory("userService", function($http, $log, $q) {
         return async.promise;
       }
   
-  
+      function login(email, password) {
+        var async = $q.defer();
+
+        var loginURL = userUrl +"?email=" + email + "&password=" + password;
+        $http.get(loginURL).then(function(response) {
+            if (response.data.length > 0) {
+                activeUser = new User(response.data[0].id, response.data[0].first_name, response.data[0].last_name, response.data[0].email, response.data[0].city, response.data[0].street, response.data[0].house_number, response.data[0].password,response.data[0].password_confirmation, response.data[0].isManager);
+                async.resolve(activeUser);
+            } else {
+                async.reject("invalid credentials");
+            }
+        }, function(err) {
+            async.reject(err);
+        });
+
+        return async.promise;
+    }
+
    
     function addUser(user) {
        var async = $q.defer();
   
-      user.isManager= users.length==0? true: false;
+      user.isManager= users.length==1? true: false;
      
       
       $http.post(userUrl,user).then( function(data,status) {
@@ -57,7 +88,7 @@ app.factory("userService", function($http, $log, $q) {
         var user = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.password, data.data.password_confirmation, data.data.isManager);
         user.isManager= users.length===0? true: false;
         users.push(user);
-        async.resolve(users);
+        async.resolve(user);
       }, function(error) {
         console.error(error);
         async.reject("failed to load cars.json");
@@ -69,7 +100,11 @@ app.factory("userService", function($http, $log, $q) {
     }
   
     return {
-   
+
+   login : login,
+   getActiveUser: getActiveUser,
+   isLoggedIn, isLoggedIn,
+   logout : logout,
     getAll: getAll,
     addUser: addUser
   

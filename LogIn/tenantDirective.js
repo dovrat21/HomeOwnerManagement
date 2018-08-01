@@ -1,6 +1,6 @@
 app.directive("myTenant", function() {
     return {
-      templateUrl: "Users/tenantDirective.html",
+      templateUrl: "Login/tenantDirective.html",
       restrict: "E"
     }
   })
