@@ -8,7 +8,8 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
 
     
     $scope.signup = function(user) {
-        $scope.invalidLogin = false;
+        user.image_url = $scope.image.dataURL;
+          $scope.invalidLogin = false;
           userService.addUser(user).then(function(activeUser) {
             $scope.activeUser = activeUser;
             // $location.path('/');

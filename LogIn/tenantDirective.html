@@ -30,18 +30,39 @@
                 <div class="form-group">
                     <input type="text" name="house_number" id="house_number" class="form-control input-lg" placeholder="מספר בית"  ng-model="user.house_number" tabindex="6">
                 </div>
-                
+                <div class="form-group">
+                    <input type="text" name="appartment" id="appartment" class="form-control input-lg" placeholder="מספר דירה"  ng-model="user.appartment" tabindex="7">
+                </div>
+               
+                <label>
+                    <input type="radio" id="isManager" name="isManager" class="form-control input-xs" ng-model="user.isManager" tabindex="8" value="true">
+                    Manager
+                  </label><br/>
+
+
+
+                  <div class="form-group">
+                    <label for="image" class="form-control input-lg">Image Url</label>
+                    <div class="form-control input-lg">
+                        <input type="file" accept="image/*" image="image"  id="image"/>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <input type="text" name="committee_id" id="committee_id" class="form-control input-lg" placeholder="שם ועד"  ng-model="user.committee_id" tabindex="9">
+                </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" ng-model="user.password" tabindex="7">
+                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" ng-model="user.password" tabindex="10">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה" ng-model="user.password_confirmation" tabindex="8">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה" ng-model="user.password_confirmation" tabindex="11">
                         </div>
                     </div>
+
+                    <img class="img-fluid" ng-src="{{image.url}}" alt="" >
                 </div>
                 <!-- <div class="row">
                     <div class="col-xs-4 col-sm-3 col-md-3"> -->
