@@ -23,6 +23,11 @@ app.config(function($routeProvider) {
     controller: 'loginCtrl'
     
   })
+  .when('/messagesList', {
+    templateUrl: 'Messages/messagesList.html',
+    controller: 'messageCtrl'
+    
+  })
 //      .when('/movies/:movieId', {
 //     templateUrl: 'Movies/movieDetail.html',
 //     controller: 'movieDetailsCtrl'
