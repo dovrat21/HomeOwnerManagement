@@ -2,7 +2,9 @@ app.factory("userService", function($http, $log, $q) {
 
   var activeUser = null;
     var users = [];
-    var userUrl="https://my-homeownre-db.herokuapp.com/users";
+    // var userUrl="https://my-homeownre-db.herokuapp.com/users";
+    var userUrl="https://my-homeowner-db.herokuapp.com/users";
+    // https://my-homeowner-db.herokuapp.com/users
   
     function User(id,first_name, last_name, email, city , street, house_number, appartment, committee_id, imageUrl, password, password_confirmation, isManager ) {
       this.id=id;
@@ -67,8 +69,8 @@ app.factory("userService", function($http, $log, $q) {
         var loginURL = userUrl +"?email=" + email + "&password=" + password;
         $http.get(loginURL).then(function(response) {
             if (response.data.length > 0) {
-                // activeUser = new User(response.data[0].id, response.data[0].first_name, response.data[0].last_name, response.data[0].email, response.data[0].city, response.data[0].street, response.data[0].house_number,response.data[0].appartment, response.data.committee_id,respons.data.imageUrl, response.data[0].password,response.data[0].password_confirmation, response.data[0].isManager);
-                activeUser = new User(response.data[0].id, response.data[0].first_name, response.data[0].last_name, response.data[0].email, response.data[0].city, response.data[0].street, response.data[0].house_number,"8", "ועד קריית גנים"," ", response.data[0].password,response.data[0].password_confirmation, response.data[0].isManager);
+                activeUser = new User(response.data[0].id, response.data[0].first_name, response.data[0].last_name, response.data[0].email, response.data[0].city, response.data[0].street, response.data[0].house_number,response.data[0].appartment, response.data[0].committee_id, " ", response.data[0].password,response.data[0].password_confirmation, response.data[0].isManager);
+                activeUser.image_url = response.data[0].image_url;
                 async.resolve(activeUser);
             } else {
                 async.reject("invalid credentials");
@@ -86,10 +88,12 @@ app.factory("userService", function($http, $log, $q) {
   
       $http.post(userUrl,user).then( function(data,status) {
         
-        var user = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, data.data.imageUrl, data.data.password, data.data.password_confirmation, data.data.isManager);
-        user.isManager= users.length===0? true: false;
-        users.push(user);
-        async.resolve(user);
+        // activeUser = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
+        activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
+        activeUser.isManager= users.length===0? true: false;
+        activeUser.image_url = data.data.image_url;
+        users.push(activeUser);
+        async.resolve(activeUser);
       }, function(error) {
         console.error(error);
         async.reject("failed to load cars.json");

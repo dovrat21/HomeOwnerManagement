@@ -30,12 +30,16 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
     $scope.login = function() {
         $scope.invalidLogin = false;
         userService.login($scope.email, $scope.password).then(function(activeUser){
-            alert("yyyyyyyyyyyyyy");
+         $scope.activeUser = activeUser;
             // $location.path("/recipes");
-        }, function() {
+        }, function(error) {
             $scope.invalidLogin = true;
+            $log.error(error);
         })
-    }
+
+
+        $scope.isLoggedIn=true;
+    };
 
 
 })

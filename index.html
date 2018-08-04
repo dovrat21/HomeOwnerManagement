@@ -44,49 +44,27 @@
 
 
     <link rel="stylesheet" href="style.css">
-    <!-- <script type="text/javascript">
-      $(document).ready(function(){
-        $("#myModal").modal('show');
-      });
-    </script> -->
-
-    <!--<script src="app/app.js"></script>-->
-    <!--<script src="app/navbar/navbarDir.js"></script>-->
-    <!--<script src="app/navbar/navbarCtrl.js"></script>-->
-    <!--<script src="app/login/loginCtrl.js"></script>-->
-    <!--<script src="app/model/userSrv.js"></script>-->
-    <!--<script src="app/recipes/recipeGalleryCtrl.js"></script>-->
-    <!--<script src="app/model/recipesSrv.js"></script>-->
-    <!--<script src="app/recipes/newRecipeCtrl.js"></script>-->
-
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <!--<title>Bootstrap Theme Simply Me</title>-->
-  <!--<meta charset="utf-8">-->
-  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
   
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
- 
 </head>
 <body>
     <div class="row">
-        <h1>{{invalidLogin}}</h1>
-      
-    <div class="col-md-3" ng-controller="menuCtrl" >
+       <div class="col-md-3" ng-controller="menuCtrl" >
         <div class="profile-sidebar">
           
-         
-          <div class="profile-userpic" ng-show="invalidLogin" >
-            <img src="https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-resume/master/img/profile.jpg" class="img-responsive" alt="">
+          <div class="profile-userpic" ng-show="isUserLoggedIn()" >
+           
+            <img src="{{currentUser().image_url}}" class="img-responsive" alt="">
+            <!-- <img ng-src="{{activeUser.image.url}}" class="img-responsive" alt=""> -->
           </div>
          
-          <div class="profile-usertitle" ng-show="invalidLogin">
-            <div>
-             {{currentuser}}
+          <div class="profile-usertitle" ng-show="isUserLoggedIn()">
+                      <div>
+            
             </div>
+           
             <div>
-              {{users[0].first_name + " "  + users[0].last_name}}
+            <h3>שלום {{currentUser().first_name + "  " + currentUser().last_namel}}  </h3>
+            
              </div>
            
           </div>
@@ -119,8 +97,8 @@
                 </li>
                 <li>
                   <a href="#" target="_blank">
-                  <i class="glyphicon glyphicon-ok"></i>
-                  Tasks </a>
+                      <i class="fas fa-envelope-square"></i>
+                  כתיבת הודעה </a>
                 </li>
                 <li>
                   <a href="#">
