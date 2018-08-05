@@ -4,13 +4,81 @@ app.controller("messageCtrl", function($scope, $rootScope, $http, $location, mes
     
     $scope.messages = [];
     $scope.currentUser=userService.getActiveUser();
+
+    $scope.query = "";
+    // $scope.filterMessages = function(message) {
+    //   if (message.body.toLowerCase().includes($scope.query.toLowerCase()) || 
+    //   message.title.toLowerCase().includes($scope.query.toLowerCase())) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+     
+    // }
+
+
+    
+    // $scope.orderByDate = function() {
+    //   $scope.messages.sort(function(a, b) {
+    //     return (new Date(b.date)) - (new Date(a.date))
+    //   })
+      
+    // }
+
+    $scope.showImportantMessages = function() {
+      $scope.query = "important";
+  
+    };
+    $scope.showDefaultMessages = function() {
+      $scope.query = "default";
+  
+    };
+    $scope.showAll = function() {
+      $scope.query = "all";
+  
+    };
+  
+   
+
+    $scope.filterMessages = function(message) {
+      if ($scope.query == "important") {
+        if (message.priority === "important") {
+          return true;
+        } 
+  
+      } else if ($scope.query == "default") {
+        if (message.priority === "default") {
+          return true;
+        }
+      } else if ($scope.query == "all") {
+        return true
+  
+      }
+  else{
+    if (message.body.toLowerCase().includes($scope.query.toLowerCase()) || 
+    message.title.toLowerCase().includes($scope.query.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+
+
+  }
+    }
+  
+  
+
+
     
     $scope.addMessage = function(message) {
       var userId=$scope.currentUser.id;
       var userCommunity=$scope.currentUser.committee_id;
       messageService.addMessage(message,userId,userCommunity).then(function(responseMessages) {
           $scope.messages = responseMessages;
-          // $location.path('/');
+          $scope.message.title="";
+          $scope.message.body="";
+          
+        
                    }, function(error) {
                     
           $log.error(error);
@@ -19,8 +87,17 @@ app.controller("messageCtrl", function($scope, $rootScope, $http, $location, mes
      
       };
 
+$scope.deleteMessage = function(messageId){
+  messageService.deleteMessage(messageId).then(function(responseMessages) {
+    $scope.messages = responseMessages;
+    // $location.path('/');
+             }, function(error) {
+              
+    $log.error(error);
+  });
 
 
+};
 
 
 

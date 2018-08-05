@@ -7,7 +7,7 @@ app.factory("messageService", function ($http, $log, $q) {
   var messageUrl = "https://dovrat-project.herokuapp.com/messages";
   // https://my-homeowner-db.herokuapp.com/users
 
-  function Message(id, title, body, priority, from,committee_id,date) {
+  function Message(id, title, body, priority, from,committee_id, date) {
     this.id = id;
     this.title = title;
     this.body = body;
@@ -18,6 +18,24 @@ app.factory("messageService", function ($http, $log, $q) {
 
   }
   
+function deleteMessage(messageId)
+{
+  var messageToDelte="https://dovrat-project.herokuapp.com/messages/"
+  var async = $q.defer();
+  // $http.delete(messageUrl, {params: {id: messageId}}).then(function (data, status) {
+    $http.delete(messageToDelte + messageId).then(function (data, status) {
+    messaages=getAll();
+    async.resolve(messaages);
+  }, function (error) {
+    console.error(error);
+    async.reject("failed to load cars.json");
+  });
+
+  return async.promise;
+ 
+}
+
+
 
   function addMessage(message, userId, userCommunity) {
     var async = $q.defer();
@@ -89,7 +107,8 @@ app.factory("messageService", function ($http, $log, $q) {
   return {
 
     getAll: getAll,
-    addMessage: addMessage
+    addMessage: addMessage,
+    deleteMessage :deleteMessage
 
   }
 
