@@ -2,8 +2,8 @@ app.factory("userService", function($http, $log, $q) {
 
   var activeUser = null;
     var users = [];
-    // var userUrl="https://my-homeownre-db.herokuapp.com/users";
-    var userUrl="https://my-homeowner-db.herokuapp.com/users";
+     var userUrl="https://dovrat-project.herokuapp.com/users";
+    // var userUrl="https://my-homeowner-db.herokuapp.com/users";
     // https://my-homeowner-db.herokuapp.com/users
   
     function User(id,first_name, last_name, email, city , street, house_number, appartment, committee_id, imageUrl, password, password_confirmation, isManager ) {
@@ -51,8 +51,13 @@ app.factory("userService", function($http, $log, $q) {
         var async = $q.defer();
     $http.get(userUrl).then(function(response) {
       users=response.data;
+      var currentUsercommunity=getActiveUser().committee_id;
+      var relevantUsers = users.filter(function (el) {
+        return el.committee_id == currentUsercommunity ;
+      });
+      
              
-            async.resolve(users);
+            async.resolve(relevantUsers);
             }, function(error) {
               $log.error(error);
              
