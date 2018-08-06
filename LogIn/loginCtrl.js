@@ -17,12 +17,8 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
                         $scope.invalidLogin = true;
             $log.error(error);
           });
-      
-          $scope.searchText = "";
-          $scope.searchResults = [];
-          $scope.isLoggedIn=true;
-      
-      
+              $scope.isLoggedIn=true;
+   
         };
 
 
