@@ -3,7 +3,11 @@ app.controller("messageCtrl", function($scope, $rootScope, $http, $location, mes
 
     
     $scope.messages = [];
-    $scope.currentUser=userService.getActiveUser();
+    // $scope.currentUser=userService.getActiveUser();
+
+    $scope.currentUser=function(){
+      return userService.getActiveUser();
+  }
 
     $scope.query = "";
     // $scope.filterMessages = function(message) {

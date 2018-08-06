@@ -1,99 +1,147 @@
-<div class="row" ng-controller="messageCtrl">
+<div ng-controller="messageCtrl">
 
-
-
-        <div class="form-group">
-                <input type="text" class="form-control"  ng-model="query">
-              </div>
-        <button type="button" class="btn btn-info btn-sm"  ng-click="showImportantMessages()">הודעות חשובות</button>
-        <button type="button" class="btn btn-info btn-sm" ng-click="showDefaultMessages()">הודעות שסובלות דיחוי</button>
-        <button type="button" class="btn btn-info btn-sm" ng-click="showAll()">כל ההודעות</button>
-
-
-        <button type="button" class="btn btn-info btn-sm" ng-click="orderByDate()">מיין לפי תאריך</button>
-    
-        <div class="col-sm-6 col-lg-3 my-2" ng-repeat="message in messages | filter : filterMessages"  ng-click="deleteMessage(message.id)"  >
-         <div class="card  h-100">
-          <!-- <img class="messageImg card-img-top"  alt=""> -->
-          <div class="card-body">
-            <h4 class="card-title"> נושא:{{message.title}}</h4>
-            <p class="card-text">{{message.body}}</p>
-          </div>
-          <div class="card-footer">
-              
-                <p class="card-text">{{message.priority}}</p>
-                <p class="card-text">{{message.date}}</p>
-          </div>
-      
-      </div>
-        </div>
-
-
-
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        צור הודעה
-        </button>
-      
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-            
-              <!-- Modal Header -->
-              <!-- <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div> -->
-              
-              <!-- Modal body -->
-              <div class="row">
-       
-                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                    <form role="form">
-                      
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" name="title" id="title" class="form-control input-lg" ng-model="message.title" placeholder="נושא ההודעה" tabindex="1">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <input type="text" name="body" id="body" class="form-control input-lg" placeholder="פרטי ההודעה" ng-model="message.body" tabindex="2">
-                                </div>
-                            </div>
-                       
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                              <div class="form-group" ng-init="message.priority=default">
-                                  <input type="radio" value="important"  ng-model="message.priority" >חשוב
-                                  <input type="radio" value="default"  ng-model="message.priority" > פחות חשוב
-                                  
-                              </div>
-                          </div>
-                       
-                       
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" ng-click="addMessage(message)" class="btn btn-danger" data-dismiss="modal">צור הודעה</button>
-                            </div>
-                        
-                        <!-- <div class="row">
-                           <div class="col-xs-12 col-md-12"><a href="#" class="btn btn-success btn-block btn-lg"  ng-click="addMessage(message)" >צור חשבון</a></div>
-                        </div> -->
-                    </form>
+    <div class="row header">
+        <div class="row">
+            <div class="col-xs-6 col-col-sm-6 col-md-6 col-xs-6 title">
+                <div class="profile-userpic">
+                    <img src="{{currentUser().image_url}}" class="img-responsive" alt="">
                 </div>
             </div>
-              <!-- Modal footer -->
-             
-              
+            <div class="col-xs-6 col-sm-6 col-md-6 text-left sub-title">
+                <h3>{{currentUser().committee_id}}</h3>
             </div>
-          </div>
         </div>
-        
+        <div class="row">
+                <div class="col-xs-6 col-col-sm-6 col-md-6 col-xs-6 title">
+                        <div  class="search-container">
+                            <div class="gQzdc">
+                                <button class="C28xL">
+                                    <div class="_1M3wR _1BC4w">
+                                        <span data-icon="back-blue" class="">
+                                            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                                <path fill="#4FC3F7" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20v-2z">
+
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="_1M3wR _3M2St">
+                                        <span data-icon="search" class="">
+                                            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".3" d="M15.009 13.805h-.636l-.22-.219a5.184 5.184 0 0 0 1.256-3.386 5.207 5.207 0 1 0-5.207 5.208 5.183 5.183 0 0 0 3.385-1.255l.221.22v.635l4.004 3.999 1.194-1.195-3.997-4.007zm-4.808 0a3.605 3.605 0 1 1 0-7.21 3.605 3.605 0 0 1 0 7.21z"></path></svg></span></div></button><span></span><div class="_2cLHw">חפש/י או התחל/י צ'אט חדש</div><label class="_2MSJr"><input type="text" class="jN-F5 copyable-text selectable-text" data-tab="2" dir="auto" title="חפש/י או התחל/י צ'אט חדש" value=""></label></div></div>
+                    
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 text-left sub-title">
+                    <h3>{{currentUser().committee_id}}</h3>
+                </div>
+            </div>
+
+
+    </div>
+    <div class="row white">
 
 
 
 
-      
-      </div>
+
+
+        <!-- <div class="form-group">
+        <input type="text" class="form-control" ng-model="query">
+    </div>
+    <button type="button" class="btn btn-info btn-sm" ng-click="showImportantMessages()">הודעות חשובות</button>
+    <button type="button" class="btn btn-info btn-sm" ng-click="showDefaultMessages()">הודעות שסובלות דיחוי</button>
+    <button type="button" class="btn btn-info btn-sm" ng-click="showAll()">כל ההודעות</button>
+
+
+    <button type="button" class="btn btn-info btn-sm" ng-click="orderByDate()">מיין לפי תאריך</button> -->
+
+        <ul class="list-group list-group-flush wide-list">
+            <li class="list-group-item" ng-repeat="message in messages | filter : filterMessages" ng-click="deleteMessage(message.id)">
+
+                <div class="row">
+                    <div class="col-xs-6 col-col-sm-6 col-md-6 col-xs-6 title">
+                        {{message.title}}
+
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 text-left sub-title">
+                        {{message.date}}
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 sub-title">
+                        {{message.body}}
+
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 text-left sub-title">
+                        {{message.priority}}
+
+                    </div>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+
+    </div>
+
+    <button type="button" class="btn btn-primary" style="margin-top: 15px;" data-toggle="modal" data-target="#myModal">
+        צור הודעה
+    </button>
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                        <form role="form">
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="title" id="title" class="form-control input-lg" ng-model="message.title" placeholder="נושא ההודעה"
+                                            tabindex="1">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="body" id="body" class="form-control input-lg" placeholder="פרטי ההודעה" ng-model="message.body"
+                                            tabindex="2">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-init="message.priority=default">
+                                        <input type="radio" value="important" ng-model="message.priority">חשוב
+                                        <input type="radio" value="default" ng-model="message.priority"> פחות חשוב
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" ng-click="addMessage(message)" class="btn btn-danger" data-dismiss="modal">צור הודעה</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
