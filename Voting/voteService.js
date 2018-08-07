@@ -20,9 +20,7 @@ app.factory("voteService", function ($http, $log, $q) {
     
     function deleteVoteSubject(voteId)
   {
-    //  var VoteUrl="https://dovrat-project.herokuapp.com/votes/"
-    var async = $q.defer();
-    // $http.delete(messageUrl, {params: {id: messageId}}).then(function (data, status) {
+      var async = $q.defer();
       $http.delete(voteUrl + voteId).then(function (data, status) {
       votes=getAll();
       async.resolve(votes);

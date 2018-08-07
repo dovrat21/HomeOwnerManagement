@@ -40,37 +40,40 @@
             <ul class="list-group list-group-flush wide-list">
                 <li class="list-group-item" ng-repeat="vote in votes">
                             <div class="row">
-                            <div class="col-xs-6 col-col-sm-6 col-md-6 col-xs-6 title">
+                                    <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title" >
+                                            <span >
+                                                <i ng-click="deleteVoteSubject(vote.id)" class="fas fa-trash-alt"></i>
+                                            </span>
+                
+                                        </div>
+                            <div class="col-xs-4 col-col-sm-4 col-md-4 col-xs-4 title">
                                 {{vote.subject}}
                             </div>
-                            <div class="col-xs-5 col-sm-5 col-md-5 text-left sub-title" style="text-align: right !important;">
-                              ניתן להצביע החל מ- {{vote.start_date}} 
+                            <div class="col-xs-7 col-sm-7 col-md-7 text-left sub-title" >
+                            
+                              {{vote.body}}
     
                             </div>
-                            <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title" style="text-align: left !important;" >
-                                <span >
-                                    <i ng-click="deleteVoteSubject(vote.id)" class="fas fa-trash-alt"></i>
-                                </span>
-    
-                            </div>
+                           
     
                         </div>
                         <div class="row">
+                                <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title">
+                                        <span>
+                                            <i ng-click="deleteVoteSubject(vote.id)" class="fas fa-trash-alt"></i>
+                                        </span>
+            
+                                    </div>
     
-                            <div class="col-xs-6 col-sm-6 col-md-6 sub-title">
-                                {{vote.body}}
+                            <div class="col-xs-4 col-sm-4 col-md-4 sub-title">
+                              ניתן להצביע החל מ- {{vote.start_date}} 
     
                             </div>
-                            <div class="col-xs-5 col-sm-5 col-md-5 text-left sub-title" style="text-align: right !important;">
+                            <div class="col-xs-7 col-sm-7 col-md-7 text-left sub-title" >
                                 עד {{vote.end_date}} 
     
                             </div>
-                            <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title" style="text-align: left !important;">
-                                <span>
-                                    <i ng-click="deleteVoteSubject(vote.id)" class="fas fa-trash-alt"></i>
-                                </span>
-    
-                            </div>
+                           
     
                         </div>
     
@@ -102,12 +105,51 @@
                                 tabindex="2">
                         </div>
                        
-                        <div class="form-group" ng-init="vote.priority=default">
+                        <div ng-controller="DatepickerPopupDemoCtrl">
+                                <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+                            
+                                <h4>Popup</h4>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <p class="input-group">
+                                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </p>
+                                  </div>
+                            
+                                  <div class="col-md-6">
+                                    <p class="input-group">
+                                      <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label>Format: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
+                                  </div>
+                                </div>
+                            
+                                <hr />
+                                <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+                                <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">2009-08-24</button>
+                                <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+                                <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
+                            </div>
+
+
+
+
+                        <!-- <div class="form-group" ng-init="vote.priority=default">
                             <input type="radio" value="reject" ng-model="vote.vote_res">מתנגד
                             <input type="radio" value="avoid" ng-model="vote.vote_res"> נמנע
                             <input type="radio" value="agree" ng-model="vote.vote_res"> מסכים 
     
-                        </div>
+                        </div> -->
                         <div class="modal-footer">
                             <button type="button" ng-click="addVoteSubject(vote)" class="btn btn-primary center center" data-dismiss="modal">שלח</button>
                         </div>
