@@ -43,6 +43,8 @@
     <script src="Login/tenantDirective.js"></script>
     <script src="Messages/messageCtrl.js"></script>
     <script src="Messages/messageService.js"></script>
+    <script src="Voting/voteCtrl.js"></script>
+    <script src="Voting/voteService.js"></script>
 
 
     <link rel="stylesheet" href="style.css">
@@ -54,10 +56,9 @@
         <div class="profile-sidebar">
           
           <div class="profile-userpic" ng-show="isUserLoggedIn()" >
-           
+        
             <img src="{{currentUser().image_url}}" class="img-responsive" alt="">
-            <!-- <img ng-src="{{activeUser.image.url}}" class="img-responsive" alt=""> -->
-          </div>
+             </div>
          
           <div class="profile-usertitle" ng-show="isUserLoggedIn()">
                       <div>
@@ -103,9 +104,9 @@
                  רשימת הודעות</a>
                 </li>
                 <li>
-                  <a href="#">
-                  <i class="glyphicon glyphicon-flag"></i>
-                  Help </a>
+                  <a href="#!/vote">
+                    <i class="fas fa-balance-scale"></i>
+                 הצבעות </a>
                 </li>
               </ul>
           </div>

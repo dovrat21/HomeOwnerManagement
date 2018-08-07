@@ -8,7 +8,7 @@
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 text-left sub-title">
                 <div class="input-group" id="adv-search">
-                    <input type="text"  ng-model="query" class="form-control" placeholder="חפש" />
+                    <input type="text" ng-model="query" class="form-control" placeholder="חפש" />
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
 
@@ -21,7 +21,7 @@
 
             </div>
             <div class="col-xs-12 col-col-sm-4 col-md-4 btn-div">
-               
+
                 <button type="button" class="btn btn-warning btn-sm" ng-click="showImportantMessages()">
                     <span class="white-title">חשוב</span>
                 </button>
@@ -36,14 +36,14 @@
 
             </div>
         </div>
-        </div>
+    </div>
 
     <div class="white">
-              <!-- <button type="button" class="btn btn-info btn-sm" ng-click="orderByDate()">מיין לפי תאריך</button> -->
-       
+        <!-- <button type="button" class="btn btn-info btn-sm" ng-click="orderByDate()">מיין לפי תאריך</button> -->
+
         <ul class="list-group list-group-flush wide-list">
-            <li class="list-group-item" ng-repeat="message in messages | filter : filterMessages" ng-click="deleteMessage(message.id)">
-               
+            <li class="list-group-item" ng-repeat="message in messages | filter : filterMessages">
+
                 <a data-toggle="tooltip" data-placement="top" title="Hooray!">
                     <div class="row">
                         <div class="col-xs-8 col-col-sm-8 col-md-8 col-xs-8 title">
@@ -55,14 +55,15 @@
 
                         </div>
                         <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title">
-                                <span>
-                                    <i  ng-click="deleteMessage(message.id)" class="fas fa-trash-alt" ></i></span>
-    
-                            </div>
+                            <span ng-show="{{currentUser().isManager}}">
+                                <i ng-click="deleteMessage(message.id)" class="fas fa-trash-alt"></i>
+                            </span>
+
+                        </div>
 
                     </div>
                     <div class="row">
-                          
+
                         <div class="col-xs-6 col-sm-6 col-md-6 sub-title">
                             {{message.body}}
 
@@ -73,20 +74,21 @@
                         </div>
 
                     </div>
-                   
-                  
+
+
                 </a>
-               
+
             </li>
-          
+
         </ul>
 
 
     </div>
-                <button type="button" class="btn btn-primary" style="margin-top: 15px; margin: 0 auto; display: flex;" data-toggle="modal" data-target="#myModal">
-                    צור הודעה
-                </button>
-   
+    <button type="button" class="btn btn-primary" style="margin-top: 15px; margin: 0 auto; display: flex;" data-toggle="modal"
+        data-target="#myModal">
+        צור הודעה
+    </button>
+
     <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">

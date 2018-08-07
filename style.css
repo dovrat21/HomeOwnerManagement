@@ -94,6 +94,13 @@ border-bottom-left-radius: 4px;
 }
 
 @media screen and (min-width: 768px) {
+
+
+  .profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+    height: 100vh;
+  }
   #adv-search {
       width: 83%;
       margin: 0 auto;
@@ -178,7 +185,7 @@ body {
   .profile-sidebar {
     padding: 20px 0 10px 0;
     background: #fff;
-    height: 100vh;
+    
   }
   
   .profile-userpic img {
