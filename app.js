@@ -1,4 +1,4 @@
-var app = angular.module("HomeApp", ["ngRoute", "imageupload","ui.bootstrap","ui.bootstrap.demo"]);
+var app = angular.module("HomeApp", ["ngRoute", "imageupload","ui.bootstrap.demo", "ui.bootstrap"]);
 // var app = angular.module("HomeApp", ["ngRoute",'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 

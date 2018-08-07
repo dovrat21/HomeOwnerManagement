@@ -8,6 +8,51 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     }
   
     $scope.query = "";
+    $scope.today = function() {
+      $scope.start_date = new Date();
+    };
+    $scope.today();
+  
+    $scope.clear = function() {
+      $scope.start_date = null;
+      $scope.end_date = null;
+      
+    };
+  
+    $scope.open1 = function() {
+      $scope.popup1.opened = true;
+    };
+  
+    $scope.open2 = function() {
+      $scope.popup2.opened = true;
+    };
+  
+    $scope.setDate = function(year, month, day) {
+      $scope.end_date = new Date(year, month, day);
+    };
+  
+    $scope.formats = ['dd.MM.yyyy'];
+    $scope.format = $scope.formats[0];
+  
+  
+    $scope.popup1 = {
+      opened: false
+    };
+  
+    $scope.popup2 = {
+      opened: false
+    };
+
+
+
+
+
+
+
+
+
+
+
      // $scope.orderByDate = function() {
     //   $scope.messages.sort(function(a, b) {
     //     return (new Date(b.date)) - (new Date(a.date))
@@ -66,6 +111,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     $scope.addVoteSubject = function (vote) {
       var userId = $scope.currentUser.id;
       var userCommunity = $scope.currentUser.committee_id;
+      
       voteService.addVoteSubject(vote, userId, userCommunity).then(function (responseVote) {
         $scope.votes = responseVote;
         $scope.vote.start_date = "";

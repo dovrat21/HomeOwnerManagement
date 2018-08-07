@@ -37,7 +37,8 @@ app.factory("voteService", function ($http, $log, $q) {
   
     function addVoteSubject(vote, userId, userCommunity) {
       var async = $q.defer();
-  
+      vote.end_date =vote.end_date.toLocaleDateString();
+      vote.start_date =vote.start_date.toLocaleDateString();
       $http.post(voteUrl, vote).then(function (data, status) {
   
         // activeUser = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
@@ -55,7 +56,7 @@ app.factory("voteService", function ($http, $log, $q) {
           mm = '0' + mm;
         }
         var newDate = dd + '/' + mm + '/' + yyyy;
-        activeVote = new Message(data.data.id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body, data.data.vote_res, userId,userCommunity);
+        activeVote = new Vote(data.data.id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body, data.data.vote_res, userId,userCommunity);
        
         votes.push(activeVote);
         async.resolve(votes);
