@@ -1,12 +1,12 @@
-<div ng-controller="messageCtrl">
+<div ng-controller="voteCtrl">
 
         <div class="header">
             <div class="row">
                 <div class="col-xs-12 col-col-sm-4 col-md-4 title">
-                    <h3>{{currentUser().committee_id}}</h3>
-                    <h3>הודעות עבור ועד הדרי סמל</h3>
+                    <!-- <h3>{{currentUser().committee_id}}</h3> -->
+                    <h3> רשימת נושאים להצבעה  - {{currentUser().committee_id}}</h3>
                 </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 text-left sub-title">
+                <!-- <div class="col-xs-12 col-sm-4 col-md-4 text-left sub-title">
                     <div class="input-group" id="adv-search">
                         <input type="text" ng-model="query" class="form-control" placeholder="חפש" />
                         <div class="input-group-btn">
@@ -19,20 +19,16 @@
                         </div>
                     </div>
     
-                </div>
+                </div> -->
                 <div class="col-xs-12 col-col-sm-4 col-md-4 btn-div">
     
                     <button type="button" class="btn btn-warning btn-sm" ng-click="showImportantMessages()">
-                        <span class="white-title">חשוב</span>
+                        <span class="white-title">הצבעות ישנות</span>
                     </button>
                     <button type="button" class="btn btn-success btn-sm" ng-click="showDefaultMessages()">
-                        <span class="white-title">סובל דיחוי</span>
+                        <span class="white-title">הצבעות על הפרק</span>
                     </button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="showAll()">
-                        <span class="white-title">כל ההודעות</span>
-                    </button>
-                    </h3>
-    
+                   
     
                 </div>
             </div>
@@ -42,21 +38,18 @@
             <!-- <button type="button" class="btn btn-info btn-sm" ng-click="orderByDate()">מיין לפי תאריך</button> -->
     
             <ul class="list-group list-group-flush wide-list">
-                <li class="list-group-item" ng-repeat="message in messages | filter : filterMessages">
-    
-                    <a data-toggle="tooltip" data-placement="top" title="Hooray!">
-                        <div class="row">
-                            <div class="col-xs-8 col-col-sm-8 col-md-8 col-xs-8 title">
-                                {{message.title}}
+                <li class="list-group-item" ng-repeat="vote in votes">
+                            <div class="row">
+                            <div class="col-xs-6 col-col-sm-6 col-md-6 col-xs-6 title">
+                                {{vote.subject}}
+                            </div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 text-left sub-title" style="text-align: right !important;">
+                              ניתן להצביע החל מ- {{vote.start_date}} 
     
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 text-left sub-title">
-                                {{message.date}}
-    
-                            </div>
-                            <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title">
-                                <span ng-show="{{currentUser().isManager}}">
-                                    <i ng-click="deleteMessage(message.id)" class="fas fa-trash-alt"></i>
+                            <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title" style="text-align: left !important;" >
+                                <span >
+                                    <i ng-click="deleteVoteSubject(vote.id)" class="fas fa-trash-alt"></i>
                                 </span>
     
                             </div>
@@ -65,11 +58,17 @@
                         <div class="row">
     
                             <div class="col-xs-6 col-sm-6 col-md-6 sub-title">
-                                {{message.body}}
+                                {{vote.body}}
     
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 text-left sub-title">
-                                {{message.priority}}
+                            <div class="col-xs-5 col-sm-5 col-md-5 text-left sub-title" style="text-align: right !important;">
+                                עד {{vote.end_date}} 
+    
+                            </div>
+                            <div class="col-xs-1 col-col-sm-1 col-md-1 col-xs-1 title" style="text-align: left !important;">
+                                <span>
+                                    <i ng-click="deleteVoteSubject(vote.id)" class="fas fa-trash-alt"></i>
+                                </span>
     
                             </div>
     
@@ -86,7 +85,7 @@
         </div>
         <button type="button" class="btn btn-primary" style="margin-top: 15px; margin: 0 auto; display: flex;" data-toggle="modal"
             data-target="#myModal">
-            צור הודעה
+            צור נושא להצבעה
         </button>
     
         <div class="modal" id="myModal">
@@ -95,21 +94,22 @@
                     <form role="form">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <div class="form-group">
-                            <input type="text" name="title" id="title" class="form-control input-lg" ng-model="message.title" placeholder="נושא ההודעה"
+                            <input type="text" name="title" id="title" class="form-control input-lg" ng-model="vote.title" placeholder="נושא ההודעה"
                                 tabindex="1">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="body" id="body" class="form-control input-lg" placeholder="פרטי ההודעה" ng-model="message.body"
+                            <input type="text" name="body" id="body" class="form-control input-lg" placeholder="פרטי ההצבעה" ng-model="vote.body"
                                 tabindex="2">
                         </div>
-    
-                        <div class="form-group" ng-init="message.priority=default">
-                            <input type="radio" value="important" ng-model="message.priority">חשוב
-                            <input type="radio" value="default" ng-model="message.priority"> פחות חשוב
+                       
+                        <div class="form-group" ng-init="vote.priority=default">
+                            <input type="radio" value="reject" ng-model="vote.vote_res">מתנגד
+                            <input type="radio" value="avoid" ng-model="vote.vote_res"> נמנע
+                            <input type="radio" value="agree" ng-model="vote.vote_res"> מסכים 
     
                         </div>
                         <div class="modal-footer">
-                            <button type="button" ng-click="addMessage(message)" class="btn btn-primary center center" data-dismiss="modal">שלח</button>
+                            <button type="button" ng-click="addVoteSubject(vote)" class="btn btn-primary center center" data-dismiss="modal">שלח</button>
                         </div>
                     </form>
                 </div>

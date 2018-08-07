@@ -1,8 +1,8 @@
-app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, messageService, userService) {
+app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteService, userService) {
 
 
 
-    $scope.messages = [];
+    $scope.votes = [];
     $scope.currentUser = function () {
       return userService.getActiveUser();
     }
@@ -15,63 +15,64 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
   
     // }
   
-    $scope.showImportantMessages = function () {
-      $scope.query = "important";
+    // $scope.showImportantMessages = function () {
+    //   $scope.query = "important";
   
-    };
-    $scope.showDefaultMessages = function () {
-      $scope.query = "default";
+    // };
+    // $scope.showDefaultMessages = function () {
+    //   $scope.query = "default";
   
-    };
-    $scope.showAll = function () {
-      $scope.query = "";
+    // };
+    // $scope.showAll = function () {
+    //   $scope.query = "";
   
-    };
+    // };
   
   
   
-    $scope.filterMessages = function (message) {
-      if (message.body) {
+    // $scope.filterMessages = function (message) {
+    //   if (message.body) {
        
-        if ($scope.query == "important") {
-          if (message.priority === "important") {
-            return true;
-          }
+    //     if ($scope.query == "important") {
+    //       if (message.priority === "important") {
+    //         return true;
+    //       }
   
-        } else if ($scope.query == "default") {
-          if (message.priority === "default") {
-            return true;
-          }
-        } else if ($scope.query == "") {
-          return true
+    //     } else if ($scope.query == "default") {
+    //       if (message.priority === "default") {
+    //         return true;
+    //       }
+    //     } else if ($scope.query == "") {
+    //       return true
   
-        }
-        else {
+    //     }
+    //     else {
           
-            if (message.body.toLowerCase().includes($scope.query.toLowerCase()) ||
-              message.title.toLowerCase().includes($scope.query.toLowerCase())) {
-              return true;
-            } else {
-              return false;
-            }
+    //         if (message.body.toLowerCase().includes($scope.query.toLowerCase()) ||
+    //           message.title.toLowerCase().includes($scope.query.toLowerCase())) {
+    //           return true;
+    //         } else {
+    //           return false;
+    //         }
          
-        }
-      }
-    }
+    //     }
+    //   }
+    // }
   
   
   
   
   
-    $scope.addMessage = function (message) {
+    $scope.addVoteSubject = function (vote) {
       var userId = $scope.currentUser.id;
       var userCommunity = $scope.currentUser.committee_id;
-      messageService.addMessage(message, userId, userCommunity).then(function (responseMessages) {
-        $scope.messages = responseMessages;
-        $scope.message.title = "";
-        $scope.message.body = "";
-  
-  
+      voteService.addVoteSubject(vote, userId, userCommunity).then(function (responseVote) {
+        $scope.votes = responseVote;
+        $scope.vote.start_date = "";
+        $scope.vote.end_date = "";
+        $scope.vote.subject = "";
+        $scope.vote.body = "";
+   
       }, function (error) {
   
         $log.error(error);
@@ -80,9 +81,9 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
   
     };
   
-    $scope.deleteMessage = function (messageId) {
-      messageService.deleteMessage(messageId).then(function (responseMessages) {
-        $scope.messages = responseMessages;
+    $scope.deleteVoteSubject = function (voteId) {
+      voteService.deleteVoteSubject(voteId).then(function (responseVotes) {
+        $scope.votes = responseVotes;
         // $location.path('/');
       }, function (error) {
   
@@ -97,27 +98,8 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
   
   
   
-    messageService.getAll().then(function (messages) {
-      $scope.messages = messages;
-  
-      //   messages.forEach(function(message) {
-      //    var fromCummunity=message.from;
-      //      $http.get(imageUrl).then(function(response) {
-  
-      //    var dogImg = response.data.message[0];
-      //        var dogImgAlt = response.data.message[1];
-  
-      //        var dogObj = new Dog(dogType, dogImg, dogImgAlt);
-      //         dogs.push(dogObj);
-  
-      //        async.resolve(dogs);
-  
-      //  }, function(error) {
-      //    console.error(error);
-      //    async.reject("failed to load cars.json");
-      //  });
-  
-      // });
+    voteService.getAll().then(function (votes) {
+      $scope.votes = votes;
   
     }, function (error) {
       $log.error(error);

@@ -42,10 +42,6 @@ function deleteMessage(messageId)
 
     $http.post(messageUrl, message).then(function (data, status) {
 
-      // activeUser = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
-      // activeMessage = new Message(data.data.id, data.data.title, data.data.priority, data.data.from);
-      // activeMessage.from = userId;
-      // activeMessage.committee_id = userCommunity;
       var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!

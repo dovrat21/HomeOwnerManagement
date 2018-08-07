@@ -28,6 +28,11 @@ app.config(function($routeProvider) {
     controller: 'messageCtrl'
     
   })
+  .when('/vote', {
+    templateUrl: 'Voting/votingList.html',
+    controller: 'voteCtrl'
+    
+  })
 //      .when('/movies/:movieId', {
 //     templateUrl: 'Movies/movieDetail.html',
 //     controller: 'movieDetailsCtrl'

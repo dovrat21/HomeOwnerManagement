@@ -1,31 +1,31 @@
-app.factory("messageService", function ($http, $log, $q) {
+app.factory("voteService", function ($http, $log, $q) {
 
-    var messaages = [];
-    var activeMessage = null;
+    var votes = [];
+    var activeVote = null;
     // var userUrl="https://my-homeownre-db.herokuapp.com/users";
     // var messageUrl="https://my-homeownre-db.herokuapp.com/messages";
-    var messageUrl = "https://dovrat-project.herokuapp.com/messages";
+    var voteUrl = "https://dovrat-project.herokuapp.com/votes";
     // https://my-homeowner-db.herokuapp.com/users
   
-    function Message(id, title, body, priority, from,committee_id, date) {
+    function Vote(id, start_date, end_date, subject, body, vote_res, user_id,has_been_vote ) {
       this.id = id;
-      this.title = title;
+      this.start_date = start_date;
+      this.end_date = end_date;
+      this.subject = subject;
       this.body = body;
-      this.priority = priority;
-      this.from = from;
-      this.committee_id = committee_id;
-      this.date = date;
-  
+      this.vote_res = vote_res;
+      this.user_id = user_id;
+      this.has_been_vote = has_been_vote;
     }
     
-  function deleteMessage(messageId)
+    function deleteVoteSubject(voteId)
   {
-    var messageToDelte="https://dovrat-project.herokuapp.com/messages/"
+    //  var VoteUrl="https://dovrat-project.herokuapp.com/votes/"
     var async = $q.defer();
     // $http.delete(messageUrl, {params: {id: messageId}}).then(function (data, status) {
-      $http.delete(messageToDelte + messageId).then(function (data, status) {
-      messaages=getAll();
-      async.resolve(messaages);
+      $http.delete(voteUrl + voteId).then(function (data, status) {
+      votes=getAll();
+      async.resolve(votes);
     }, function (error) {
       console.error(error);
       async.reject("failed to load cars.json");
@@ -37,10 +37,10 @@ app.factory("messageService", function ($http, $log, $q) {
   
   
   
-    function addMessage(message, userId, userCommunity) {
+    function addVoteSubject(vote, userId, userCommunity) {
       var async = $q.defer();
   
-      $http.post(messageUrl, message).then(function (data, status) {
+      $http.post(voteUrl, vote).then(function (data, status) {
   
         // activeUser = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
         // activeMessage = new Message(data.data.id, data.data.title, data.data.priority, data.data.from);
@@ -57,10 +57,10 @@ app.factory("messageService", function ($http, $log, $q) {
           mm = '0' + mm;
         }
         var newDate = dd + '/' + mm + '/' + yyyy;
-        activeMessage = new Message(data.data.id, data.data.title, data.data.body, data.data.priority, userId, userCommunity, newDate);
+        activeVote = new Message(data.data.id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body, data.data.vote_res, userId,userCommunity);
        
-        messaages.push(activeMessage);
-        async.resolve(messaages);
+        votes.push(activeVote);
+        async.resolve(votes);
       }, function (error) {
         console.error(error);
         async.reject("failed to load cars.json");
@@ -88,11 +88,11 @@ app.factory("messageService", function ($http, $log, $q) {
   
     function getAll() {
       var async = $q.defer();
-      $http.get(messageUrl).then(function (response) {
-        messaages = response.data;
+      $http.get(voteUrl).then(function (response) {
+        votes = response.data;
   
   
-        async.resolve(messaages);
+        async.resolve(votes);
       }, function (error) {
         $log.error(error);
   
@@ -107,8 +107,8 @@ app.factory("messageService", function ($http, $log, $q) {
     return {
   
       getAll: getAll,
-      addMessage: addMessage,
-      deleteMessage :deleteMessage
+      addVoteSubject: addVoteSubject,
+      deleteVoteSubject :deleteVoteSubject
   
     }
   
