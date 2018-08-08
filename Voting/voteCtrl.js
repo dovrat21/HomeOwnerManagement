@@ -1,11 +1,11 @@
 app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteService, userService) {
 
-
-
-    $scope.votes = [];
+  
     $scope.currentUser = function () {
       return userService.getActiveUser();
     }
+    $scope.radioModel = 'Avoid';
+    $scope.votes = [];
   
     $scope.query = "";
     $scope.today = function() {
@@ -42,15 +42,6 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     $scope.popup2 = {
       opened: false
     };
-
-
-
-
-
-
-
-
-
 
 
      // $scope.orderByDate = function() {
@@ -104,10 +95,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     //   }
     // }
   
-  
-  
-  
-  
+    
     $scope.addVoteSubject = function (vote) {
       var userId = $scope.currentUser.id;
       var userCommunity = $scope.currentUser.committee_id;
