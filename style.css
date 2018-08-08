@@ -6,6 +6,14 @@ body {
     text-align: right;
     direction:rtl;
 }
+[class*="col-"]{
+  float:right!important;
+
+}
+i {
+  margin-left: 10px;
+  font-size:18px;
+}
 .white {
   background-color: white;
 }

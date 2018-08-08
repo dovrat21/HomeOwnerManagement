@@ -4,7 +4,7 @@ app.factory("voteService", function ($http, $log, $q) {
     var activeVote = null;
     // var userUrl="https://my-homeownre-db.herokuapp.com/users";
     // var messageUrl="https://my-homeownre-db.herokuapp.com/messages";
-    var voteUrl = "https://dovrat-project.herokuapp.com/votes";
+    var voteUrl = "https://dovrat-project.herokuapp.com/votes/";
     // https://my-homeowner-db.herokuapp.com/users
   
     function Vote(id, start_date, end_date, subject, body, vote_res, user_id,has_been_vote ) {
@@ -22,10 +22,11 @@ app.factory("voteService", function ($http, $log, $q) {
   {
       var async = $q.defer();
       $http.delete(voteUrl + voteId).then(function (data, status) {
+
       votes=getAll();
       async.resolve(votes);
     }, function (error) {
-      console.error(error);
+      console.log(error);
       async.reject("failed to load cars.json");
     });
   
