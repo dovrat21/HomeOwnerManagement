@@ -2,7 +2,7 @@ app.factory("userService", function($http, $log, $q) {
 
   var activeUser = null;
     var users = [];
-     var userUrl="https://dovrat-project.herokuapp.com/users/";
+     var userUrl="https://dovrat-project.herokuapp.com/users";
     // var userUrl="https://my-homeowner-db.herokuapp.com/users";
     // https://my-homeowner-db.herokuapp.com/users
   
@@ -88,8 +88,9 @@ app.factory("userService", function($http, $log, $q) {
     }
     function deleteUser(userId)
     {
-        var async = $q.defer();
-        $http.delete(userUrl + userId).then(function (data, status) {
+       var urlToDelete = "https://dovrat-project.herokuapp.com/users/"
+      var async = $q.defer();
+        $http.delete(urlToDelete + userId).then(function (data, status) {
         users=getAll();
         async.resolve(users);
       }, function (error) {
@@ -128,8 +129,8 @@ app.factory("userService", function($http, $log, $q) {
 
     function update(userId, user) {
       var async = $q.defer();
- 
-     $http.put(userUrl + userId, user).then( function(data,status) {
+      var urlToUpdate = "https://dovrat-project.herokuapp.com/users/"
+     $http.put(urlToUpdate + userId, user).then( function(data,status) {
       
       
        activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
