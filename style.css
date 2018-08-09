@@ -1,6 +1,6 @@
 /* Styles go here */
 body {
-    font: 20px Montserrat, sans-serif;
+    font: 18px Montserrat, sans-serif;
     line-height: 1.8;
     
     text-align: right;
@@ -213,8 +213,8 @@ body {
   .profile-userpic img {
     float: none;
     margin: 0 auto;
-    width: 50%;
-    height: 50%;
+    width: 35%;
+    height: 35%;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
@@ -270,7 +270,7 @@ body {
   }
   
   .profile-usermenu ul li a {
-    color: #93a3b5;
+    color: #93a3b5 !important;
     font-size: 14px;
     font-weight: 400;
   }
@@ -301,6 +301,15 @@ body {
     padding: 20px;
     background: #fff;
     min-height: 460px;
+  }
+
+  .input-group-addon:first-child {
+ 
+ border-radius: 6px;
+}
+
+  .tenantDetails{
+    list-style: none;
   }
   .panel-heading {
     padding: 5px 15px;
