@@ -1,9 +1,34 @@
 app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteService, userService) {
 
-  
+  $scope.currentVote = null;
+   
+  $scope.getCurrentVoteId = function(vote) {
+    $scope.currentVote = vote;
+    alert($scope.currentVote);
+   
+    }
+
     $scope.currentUser = function () {
       return userService.getActiveUser();
     }
+    
+    
+    $scope.addVote = function(currentVote){
+      var voteRes=currentVote;
+      var userId = $scope.currentUser().id;
+      var currentVote =$scope.currentVote;
+      voteService.addVote(voteRes, userId, currentVote).then(function (responseVote) {
+        // $scope.votes = responseVote;
+      
+      }, function (error) {
+  
+        $log.error(error);
+      });
+  
+  
+    }           
+    
+    
     $scope.radioModel = 'Avoid';
     $scope.votes = [];
   

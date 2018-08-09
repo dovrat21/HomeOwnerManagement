@@ -3,6 +3,7 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
 
 
   $scope.messages = [];
+ 
   $scope.currentUser = function () {
     return userService.getActiveUser();
   }
