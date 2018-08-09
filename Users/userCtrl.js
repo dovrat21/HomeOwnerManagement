@@ -7,7 +7,35 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
     $scope.invalidLogin = false;
     $scope.isLoggedIn=false;
    $scope.currentUser=null;
-    userService.getAll().then(function(users) {
+   $scope.userToUpdate=null;
+
+
+   $scope.sendUserToUpdate = function(user) {
+    $scope.userToUpdate = user;
+    alert($scope.currentUser.first_name);
+   
+    }
+
+
+     $scope.deleteUser = function(userId){
+    userService.deleteUser(userId).then(function (responseMessages) {
+     $scope.users = responseMessages;
+        }, function (error) {
+
+     $log.error(error);
+   });
+  }
+   
+    $scope.update = function(userId, user ){
+     userService.update(userId, user).then(function (responseMessages) {
+      $scope.users = responseMessages;
+         }, function (error) {
+
+      $log.error(error);
+    });
+   }
+  
+   userService.getAll().then(function(users) {
       $scope.users = users;
   
     }, function(error) {

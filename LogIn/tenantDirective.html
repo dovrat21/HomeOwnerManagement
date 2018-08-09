@@ -2,85 +2,79 @@
 
     <div class="row">
 
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <form role="form">
 
-                <hr class="colorgraph">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control input-lg" ng-model="user.first_name" placeholder="שם פרטי"
-                                tabindex="1">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="שם משפחה" ng-model="user.last_name"
-                                tabindex="2">
-                        </div>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" ng-model="user.first_name" placeholder="שם פרטי"
+                            tabindex="1">
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="כתובת דוא''ל" ng-model="user.email"
-                        tabindex="3">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="city" id="citye" class="form-control input-lg" placeholder="עיר" ng-model="user.city" tabindex="4">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="street" id="street" class="form-control input-lg" placeholder="רחוב" ng-model="user.street" tabindex="5">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="house_number" id="house_number" class="form-control input-lg" placeholder="מספר בית" ng-model="user.house_number"
-                        tabindex="6">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="appartment" id="appartment" class="form-control input-lg" placeholder="מספר דירה" ng-model="user.appartment"
-                        tabindex="7">
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="isManager" name="isManager" class="form-contro" ng-model="user.isManager" tabindex="8" value="true">
-                    <span style="color: #555">ראש הוועד</span>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="committee_id" id="committee_id" class="form-control input-lg" placeholder="שם ועד" ng-model="user.committee_id"
-                        tabindex="9">
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" ng-model="user.password"
-                                tabindex="10">
-                        </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="שם משפחה" ng-model="user.last_name"
+                            tabindex="2">
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה"
-                                ng-model="user.password_confirmation" tabindex="11">
-                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="כתובת דוא''ל" ng-model="user.email"
+                            tabindex="3">
                     </div>
+                </div>
+            </div>
 
-                    <!-- <img class="img-fluid" ng-src="{{image.url}}" alt=""> -->
+            <div class="form-group">
+                <input type="text" name="city" id="citye" class="form-control input-lg" placeholder="עיר" ng-model="user.city" tabindex="4">
+            </div>
+            <div class="form-group">
+                <input type="text" name="street" id="street" class="form-control input-lg" placeholder="רחוב" ng-model="user.street" tabindex="5">
+            </div>
+            <div class="form-group">
+                <input type="text" name="house_number" id="house_number" class="form-control input-lg" placeholder="מספר בית" ng-model="user.house_number"
+                    tabindex="6">
+            </div>
+            <div class="form-group">
+                <input type="text" name="appartment" id="appartment" class="form-control input-lg" placeholder="מספר דירה" ng-model="user.appartment"
+                    tabindex="7">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="isManager" name="isManager" class="form-contro" ng-model="user.isManager" tabindex="8" value="true">
+                <span style="color: #555">ראש הוועד</span>
+            </div>
+            <div class="form-group">
+                <input type="text" name="committee_id" id="committee_id" class="form-control input-lg" placeholder="שם ועד" ng-model="user.committee_id"
+                    tabindex="9">
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" ng-model="user.password"
+                            tabindex="10">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה"
+                            ng-model="user.password_confirmation" tabindex="11">
+                    </div>
                 </div>
 
-                <!-- <div class="form-group">
-                          <div class="form-control input-lg">
-                        
-                    </div>
-                </div> -->
-                <div class="profile-userpic" >
-                        <input type="file" accept="image/*" image="image" id="image" />
-                        <img ng-src="{{image.url}}" alt="" class="img-responsive" alt="" width="30%" height="30%" >
-                         </div>
+                        </div>
 
-                <hr class="colorgraph">
-                <!-- <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <a href="#" class="btn btn-success btn-block btn-lg" ng-click="signup(user)">צור חשבון</a>
-                    </div>
-                </div> -->
-            </form>
-        </div>
+                   <div class="profile-userpic">
+                <input type="file" accept="image/*" image="image" id="image" />
+                <img ng-src="{{image.url}}" alt="" class="img-responsive" alt="" width="30%" height="30%">
+            </div>
+
+            <hr class="colorgraph">
+           
+        </form>
+     
     </div>
 
 </div>
