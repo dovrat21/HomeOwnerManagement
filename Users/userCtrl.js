@@ -12,8 +12,7 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
 
    $scope.sendUserToUpdate = function(user) {
     $scope.userToUpdate = user;
-    alert($scope.currentUser.first_name);
-   
+  
     }
 
 
@@ -27,8 +26,10 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
   }
    
     $scope.update = function(userId, user ){
-     userService.update(userId, user).then(function (responseMessages) {
-      $scope.users = responseMessages;
+     user.image_url = $scope.userToUpdate.image_url;
+     userService.update(userId, user,$scope.userToUpdate).then(function (responseMessages) {
+   alert(responseMessages.image_url);
+   alert(responseMessages.imageUrl);
          }, function (error) {
 
       $log.error(error);
@@ -36,7 +37,15 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
    }
   
    userService.getAll().then(function(users) {
-      $scope.users = users;
+       if( $scope.userToUpdate===null || $scope.userToUpdate===undefined )
+       {
+        $scope.users = users;
+        
+       }
+      else{
+        $scope.users = $scope.userToUpdate;
+
+      }
   
     }, function(error) {
       $log.error(error);

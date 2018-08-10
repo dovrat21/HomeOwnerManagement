@@ -8,13 +8,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" ng-model="user.first_name" placeholder="שם פרטי"
+                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" ng-model="user.first_name" placeholder="{{userToUpdate.first_name===undefined? 'שם פרטי' : userToUpdate.first_name}}"
+                       
                             tabindex="1">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                        <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="שם משפחה" ng-model="user.last_name"
+                        <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="{{userToUpdate.last_name===undefined? 'שם משפחה' : userToUpdate.last_name}}" ng-model="user.last_name"
                             tabindex="2">
                     </div>
                 </div>
@@ -22,24 +23,24 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="כתובת דוא''ל" ng-model="user.email"
+                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="{{userToUpdate.email===undefined? 'אימייל' : userToUpdate.email}}" ng-model="user.email"
                             tabindex="3">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <input type="text" name="city" id="citye" class="form-control input-lg" placeholder="עיר" ng-model="user.city" tabindex="4">
+                <input type="text" name="city" id="citye" class="form-control input-lg" placeholder="{{userToUpdate.city===undefined? 'עיר' : userToUpdate.city}}" ng-model="user.city" tabindex="4">
             </div>
             <div class="form-group">
-                <input type="text" name="street" id="street" class="form-control input-lg" placeholder="רחוב" ng-model="user.street" tabindex="5">
+                <input type="text" name="street" id="street" class="form-control input-lg" placeholder="{{userToUpdate.street===undefined? 'רחוב' : userToUpdate.street}}" ng-model="user.street" tabindex="5">
             </div>
             <div class="form-group">
-                <input type="text" name="house_number" id="house_number" class="form-control input-lg" placeholder="מספר בית" ng-model="user.house_number"
+                <input type="text" name="house_number" id="house_number" class="form-control input-lg" placeholder="{{userToUpdate.house_number===undefined? ' מספר בית' : userToUpdate.house_number}}" ng-model="user.house_number"
                     tabindex="6">
             </div>
             <div class="form-group">
-                <input type="text" name="appartment" id="appartment" class="form-control input-lg" placeholder="מספר דירה" ng-model="user.appartment"
+                <input type="text" name="appartment" id="appartment" class="form-control input-lg" placeholder="{{userToUpdate.appartment===undefined? 'דירה' : userToUpdate.appartment}}" ng-model="user.appartment"
                     tabindex="7">
             </div>
             <div class="form-group">
@@ -47,19 +48,19 @@
                 <span style="color: #555">ראש הוועד</span>
             </div>
             <div class="form-group">
-                <input type="text" name="committee_id" id="committee_id" class="form-control input-lg" placeholder="שם ועד" ng-model="user.committee_id"
+                <input type="text" name="committee_id" id="committee_id" class="form-control input-lg" placeholder="{{userToUpdate.committee_id===undefined? 'שם ועד' : userToUpdate.committee_id}}" ng-model="user.committee_id"
                     tabindex="9">
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="סיסמה" ng-model="user.password"
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="{{userToUpdate.password===undefined? 'סיסמה' : userToUpdate.password}}" ng-model="user.password"
                             tabindex="10">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="אמת סיסמה"
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="{{userToUpdate.password_confirmation===undefined? 'אמת סיסמה' : userToUpdate.password_confirmation}}"
                             ng-model="user.password_confirmation" tabindex="11">
                     </div>
                 </div>

@@ -9,7 +9,7 @@ app.factory("userService", function($http, $log, $q) {
     function User(id,first_name, last_name, email, city , street, house_number, appartment, committee_id, imageUrl, password, password_confirmation, isManager ) {
       this.id=id;
       this.first_name = first_name;
-      this.last_namel = last_name;
+      this.last_name = last_name;
       this.email = email;
       this.city = city;
       this.street = street;
@@ -127,17 +127,31 @@ app.factory("userService", function($http, $log, $q) {
 
 
 
-    function update(userId, user) {
+    function update(userId, userFixed, userOld ) {
       var async = $q.defer();
-      var urlToUpdate = "https://dovrat-project.herokuapp.com/users/"
-     $http.put(urlToUpdate + userId, user).then( function(data,status) {
+      var urlToUpdate = "https://dovrat-project.herokuapp.com/users/";
+      var updatedUser = new User(userId,
+        userFixed.first_name===undefined? userOld.first_name:userFixed.first_name, 
+        userFixed.last_name===undefined? userOld.last_name:userFixed.last_name, 
+        userFixed.email===undefined? userOld.email:userFixed.email, 
+        userFixed.city===undefined? userOld.city:userFixed.city, 
+        userFixed.street===undefined? userOld.street:userFixed.street,
+        userFixed.house_number===undefined? userOld.house_number:userFixed.house_number, 
+        userFixed.appartment===undefined? userOld.appartment:userFixed.appartment, 
+        userFixed.committee_id===undefined? userOld.committee_id:userFixed.committee_id, 
+        // userFixed.image_url===undefined? userOld.image_url:userFixed.image_url, 
+        userFixed.password===undefined? userOld.password:userFixed.password, 
+        userFixed.password_confirmation===undefined? userOld.password_confirmation:userFixed.password_confirmation, 
+        userFixed.isManager===undefined? userOld.isManager:userFixed.isManager);
+        
+        updatedUser.image_url=userOld.image_url;
+       
+        $http.put(urlToUpdate + userId, updatedUser).then( function(data,status) {
       
       
-       activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
-       activeUser.isManager= users.length===0? true: false;
+       activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, data.data.imageUrl, data.data.password, data.data.password_confirmation, data.data.isManager);
        activeUser.image_url = data.data.image_url;
-       users.push(activeUser);
-       async.resolve(users);
+       async.resolve(activeUser);
      }, function(error) {
        console.error(error);
        async.reject("failed to load cars.json");

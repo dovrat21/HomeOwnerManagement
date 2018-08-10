@@ -60,7 +60,13 @@ i {
   padding: 14px;
   
 }
-
+.card-img-top {
+  width: 48% !important;
+  margin-right: 23%;
+    margin-top: 10%;
+  border-top-left-radius: calc(.25rem - 1px);
+  border-top-right-radius: calc(.25rem - 1px);
+}
 
 .btn .caret {
   margin-left: -8px !important ;
