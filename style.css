@@ -14,7 +14,7 @@ i {
   margin-left: 10px;
   font-size:18px;
 }
-.voteBtn{
+.voteBtnOpt{
   margin: 0 auto;
   width: 46%;
   margin-bottom: 20px;
@@ -397,4 +397,10 @@ body {
 .ng-modal-dialog-content {
   padding:20px;
   text-align: left;
+}
+.voteBtn{
+  width: 157px;
+    margin: 4px;
+    text-align:center;
+
 }

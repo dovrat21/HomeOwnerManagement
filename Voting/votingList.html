@@ -1,22 +1,23 @@
 <div ng-controller="voteCtrl">
 
     <div class="header">
+        <h3> רשימת נושאים להצבעה - {{currentUser().committee_id}}</h3>
         <div class="row">
-            <div class="col-xs-12 col-col-sm-4 col-md-4 title">
-                <h3> רשימת נושאים להצבעה - {{currentUser().committee_id}}</h3>
-            </div>
 
-            <div class="col-xs-12 col-col-sm-4 col-md-4 btn-div">
+            <button type="button" class="btn btn-warning btn-sm voteBtn" ng-click="showFutureVotes()">
+                <span class="white-title">הצבעות שטרם התחילו </span>
+            </button>
+            <button type="button" class="btn btn-success btn-sm voteBtn" ng-click="showRelevantVotes()">
+                <span class="white-title">הצבעות על הפרק</span>
+            </button>
+            <button type="button" class="btn btn-primary btn-sm voteBtn" ng-click="showAll()">
+                <span class="white-title">כל ההצבעות </span>
+            </button>
+            <button type="button" class="btn btn- btn-sm voteBtn" ng-click="showOverVotes()">
+                <span class="white-title">הצבעות שהסתיימו</span>
+            </button>
 
-                <button type="button" class="btn btn-warning btn-sm" ng-click="showImportantMessages()">
-                    <span class="white-title">הצבעות ישנות</span>
-                </button>
-                <button type="button" class="btn btn-success btn-sm" ng-click="showDefaultMessages()">
-                    <span class="white-title">הצבעות על הפרק</span>
-                </button>
-
-
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 
@@ -28,7 +29,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-col-sm-5 col-md-5 title">
                         <span ng-click="deleteVoteSubject(vote.id)">
-                            <i  class="fas fa-trash-alt"></i>
+                            <i class="fas fa-trash-alt"></i>
                         </span> {{vote.subject}} {{vote.id}}
                     </div>
                     <div class="col-xs-12 col-sm-7 col-md-7 sub-title">
@@ -37,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 sub-title">
-                        <span data-toggle="modal" data-target="#voteModal" ng-click="getCurrentVoteId(vote)">
+                        <span data-toggle="modal" data-target="#voteModal" ng-click="votePrerequisite(vote)">
                             <i class="fas fa-hand-paper"></i>
                         </span> ניתן להצביע החל מ- {{vote.start_date}} עד {{vote.end_date}}
 
@@ -106,24 +107,24 @@
     </div>
 
     <div class="modal" id="voteModal">
-        <div class="modal-dialog">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <div class="modal-content">
-                   <form role="form">
-                    
+
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-content">
+            <div class="alert alert-danger" role="alert" ng-show="voteIsOver">
+                מועד ההצבעה הסתיים </div>
+            <div class="modal-dialog"  ng-hide="voteIsOver">
+                    <div class="alert alert-danger" role="alert" ng-show="yetToCome">
+                            מועד ההצבעה טרם התחיל </div>
+                        <div class="modal-dialog"  ng-hide="voteIsOver">
+                <form role="form" ng-hide="yetToCome" >
+
                     <h2>{{currentVote.subject}}</h2>
                     <h3>{{currentVote.body}}</h3>
-                    <!-- <div class="form-group">
-                        <input type="text" value="{{currentUser().committee_id}}" name="title" class="form-control input-lg" tabindex="1">
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <input type="text" name="body" id="body" class="form-control input-lg" placeholder="{{currentUser().committee_id}}" ng-model="vote.body"
-                            tabindex="2">
-                    </div> -->
 
                     <hr />
                     <div ng-init="vote.priority=default">
-                        <div class="voteBtn">
+                        <div class="voteBtnOpt">
                             <label class="btn btn-danger" ng-model="vote.vote_res" value="reject" uib-btn-radio="'Reject'">מתנגד</label>
                             <label class="btn btn-primary" ng-model="vote.vote_res" value="avoid" uib-btn-radio="'Avoid'">נמנע</label>
                             <label class="btn btn-success" ng-model="vote.vote_res" value="agree" uib-btn-radio="'Agree'">מסכים</label>

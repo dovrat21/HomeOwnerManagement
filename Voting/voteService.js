@@ -114,20 +114,21 @@ app.factory("voteService", function ($http, $log, $q) {
   //       activeUser = null;
   //   }
 
-  //  function getActiveUser(){
-  //    return activeUser;
-  //  }
+ 
 
-  function getAll() {
+  function getAll(committee_id) {
     var async = $q.defer();
     $http.get(voteProposalUrl).then(function (response) {
+      
       votesSubjects = response.data;
-
-      async.resolve(votesSubjects);
+       var relevantSubject = votesSubjects.filter(function (el) {
+        return el.committee_id == committee_id ;
+      });
+      async.resolve(relevantSubject);
     }, function (error) {
       $log.error(error);
 
-      async.reject("failed to load cars.json");
+      async.reject("failed to load proposals");
     });
 
 
