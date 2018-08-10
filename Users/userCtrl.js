@@ -28,9 +28,21 @@ app.controller("userCtrl", function($scope, $rootScope, $http, $location, userSe
     $scope.update = function(userId, user ){
      user.image_url = $scope.userToUpdate.image_url;
      userService.update(userId, user,$scope.userToUpdate).then(function (responseMessages) {
-   alert(responseMessages.image_url);
-   alert(responseMessages.imageUrl);
-         }, function (error) {
+        $scope.users = responseMessages;
+        $scope.userToUpdate=null;
+        $scope.user.last_name = "";
+        $scope.first_name = "";
+        $scope.email = "";
+        $scope.city = "";
+        $scope.street = "";
+        $scope.house_number = "";
+        $scope.appartment="";
+        $scope.committee_id="";
+        $scope.imageUrl="";
+        $scope.password = "";
+        $scope.password_confirmation = "";
+        $scope.isManager = "";
+        }, function (error) {
 
       $log.error(error);
     });

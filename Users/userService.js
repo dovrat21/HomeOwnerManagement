@@ -22,18 +22,6 @@ app.factory("userService", function($http, $log, $q) {
       this.isManager = isManager;
     }
   
-//    $http.get('Users/users.json').then(function(response) {
-//            response.data.forEach(function(plainObj) {
-//           var user = new User(plainObj.name, plainObj.birthday, plainObj.imgUrl.replace("https://image.tmdb.org/t/p/w300", ""), plainObj.imdb);
-//         //   actor.imgUrl = plainObj.imgUrl.replace("https://image.tmdb.org/t/p/w300", "");
-//         //   actor.imdb = plainObj.imdb.replace("https://www.imdb.com/name/", "");
-//           users.push(user);
-//           });
-//         }, function(error) {
-//           $log.error(error);
-//         });
-    // This function loads all the actors into the actors array
-
 
     function isLoggedIn() {
       return activeUser ? true : false;
@@ -151,6 +139,8 @@ app.factory("userService", function($http, $log, $q) {
       
        activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, data.data.imageUrl, data.data.password, data.data.password_confirmation, data.data.isManager);
        activeUser.image_url = data.data.image_url;
+       users=getAll();
+        async.resolve(users);
        async.resolve(activeUser);
      }, function(error) {
        console.error(error);

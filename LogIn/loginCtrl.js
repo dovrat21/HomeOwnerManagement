@@ -12,7 +12,7 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
           $scope.invalidLogin = false;
           userService.addUser(user).then(function(activeUser) {
             $scope.activeUser = activeUser;
-            // $location.path('/');
+            $location.path('/tenantsList');
                      }, function(error) {
                         $scope.invalidLogin = true;
             $log.error(error);
