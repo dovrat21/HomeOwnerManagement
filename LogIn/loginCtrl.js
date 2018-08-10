@@ -1,40 +1,40 @@
-app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userService ) {
+app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, userService) {
 
 
     $scope.email = "";
     $scope.password = "";
     $scope.invalidLogin = false;
-    $scope.activeUser=null;
+    $scope.activeUser = null;
 
-    
-    $scope.signup = function(user) {
+
+    $scope.signup = function (user) {
         user.image_url = $scope.image.dataURL;
-          $scope.invalidLogin = false;
-          userService.addUser(user).then(function(activeUser) {
+        $scope.invalidLogin = false;
+        userService.addUser(user).then(function (activeUser) {
             $scope.activeUser = activeUser;
             $location.path('/tenantsList');
-                     }, function(error) {
-                        $scope.invalidLogin = true;
+        }, function (error) {
+            $scope.invalidLogin = true;
             $log.error(error);
-          });
-              $scope.isLoggedIn=true;
-   
-        };
+        });
+        $scope.isLoggedIn = true;
+
+    };
 
 
 
-    $scope.login = function() {
+    $scope.login = function () {
         $scope.invalidLogin = false;
-        userService.login($scope.email, $scope.password).then(function(activeUser){
-         $scope.activeUser = activeUser;
-            // $location.path("/recipes");
-        }, function(error) {
+        userService.login($scope.email, $scope.password).then(function (activeUser) {
+            $scope.activeUser = activeUser;
+            $location.path("/");
+        }, function (error) {
             $scope.invalidLogin = true;
             $log.error(error);
         })
 
 
-        $scope.isLoggedIn=true;
+        $scope.isLoggedIn = true;
     };
 
 
@@ -50,18 +50,18 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
 
 
 
-    
+
 //     $scope.users = [];
 //     $scope.invalidLogin = false;
 //     $scope.isLoggedIn=false;
 //    $scope.currentUser=null;
 //     userService.getAll().then(function(users) {
 //       $scope.users = users;
-  
+
 //     }, function(error) {
 //       $log.error(error);
 //     })
-  
+
 //   $scope.currentuser=$scope.users[0];
 
 
@@ -72,7 +72,7 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
 //         $scope.users = users;
 //         var tenantList1 = users.filter(person => person.email === user.email);
 //         var tenantList2 = users.filter(person => person.password === user.password);
-     
+
 //        if (tenantList2.length>0)
 //        {
 //            $scope.currentUser=user;
@@ -86,16 +86,16 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
 //         // $("#myModal").modal('show');
 
 //        }
-    
+
 //       }, function(error) {
 //         $scope.invalidLogin = true;
 //         $log.error(error);
 //       })
-     
+
 
 
 //  };
-   
+
 //   $scope.addUser = function(user) {
 //     $scope.invalidLogin = false;
 //       userService.addUser(user).then(function(users) {
@@ -105,14 +105,14 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
 //                     $scope.invalidLogin = true;
 //         $log.error(error);
 //       });
-  
+
 //       $scope.searchText = "";
 //       $scope.searchResults = [];
 //       $scope.isLoggedIn=true;
-  
-  
+
+
 //     };
-  
+
 
 //     $(function () {
 //     $('.button-checkbox').each(function () {
@@ -179,7 +179,7 @@ app.controller("loginCtrl", function($scope, $rootScope, $http, $location, userS
 //         init();
 //     });
 // });
-  
+
 //   });
 
 

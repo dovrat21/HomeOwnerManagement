@@ -151,9 +151,10 @@ border-bottom-left-radius: 4px;
 p {font-size: 16px;}
 .margin {margin-bottom: 45px;}
 .bg-1 { 
-    background-color: black; /* Green */
-    color: #ffffff;
+    background-color: #e9ebee;
+    color: #5a7391;
 }
+
 .bg-2 { 
     background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
