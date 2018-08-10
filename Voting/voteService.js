@@ -23,12 +23,13 @@ app.factory("voteService", function ($http, $log, $q) {
   function Proposal(id, start_date, end_date, subject, body, committee_id) {
     this.id = id;
     this.committee_id = committee_id,
-    this.start_date = start_date;
+      this.start_date = start_date;
     this.end_date = end_date;
     this.subject = subject;
     this.body = body;
+
   }
-  
+
   function deleteVoteSubject(voteId) {
     var urlToDelete = "https://dovrat-project.herokuapp.com/proposals/"
     var async = $q.defer();
@@ -48,20 +49,33 @@ app.factory("voteService", function ($http, $log, $q) {
 
   function addVoteSubject(voteSubject) {
     var async = $q.defer();
-  
+   
+    var dd = voteSubject.start_date.getDate();
+    var mm = voteSubject.start_date.getMonth() + 1; //January is 0!
+    var yyyy = voteSubject.start_date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    var newstartDate = dd + '/' + mm + '/' + yyyy;
+
+    dd = voteSubject.end_date.getDate();
+    mm = voteSubject.end_date.getMonth() + 1; //January is 0!
+    yyyy = voteSubject.end_date.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    var newendDate = dd + '/' + mm + '/' + yyyy;
+    voteSubject.start_date= newstartDate;
+    voteSubject.end_date = newendDate;
+
     $http.post(voteProposalUrl, voteSubject).then(function (data, status) {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1; //January is 0!
-      var yyyy = today.getFullYear();
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      var newDate = dd + '/' + mm + '/' + yyyy;
-      activeVoteSubject = new Proposal(data.data.id,cdata.data.committee_id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body );
+    activeVoteSubject = new Proposal(data.data.id, data.data.committee_id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body);
 
       votesSubjects.push(activeVoteSubject);
       async.resolve(votesSubjects);
@@ -76,7 +90,8 @@ app.factory("voteService", function ($http, $log, $q) {
 
   function addVote(voteRes, userId, currentVote) {
     var async = $q.defer();
-    var voteObj = new Vote(currentVote.voteSubjectId,voteRes, userId, true);
+    var voteObj = new Vote(currentVote.voteSubjectId, voteRes, userId, true);
+
     $http.post(voteUrl, voteObj).then(function (data, status) {
       var activeVote = new Vote(data.data.id, data.data.voteSubjectId, data.data.vote_res, data.data.user_id, data.data.has_been_vote);
       async.resolve(activeVote);
@@ -87,7 +102,7 @@ app.factory("voteService", function ($http, $log, $q) {
 
     return async.promise;
 
- }
+  }
 
 
 
@@ -108,7 +123,7 @@ app.factory("voteService", function ($http, $log, $q) {
     $http.get(voteProposalUrl).then(function (response) {
       votesSubjects = response.data;
 
-      async.resolve(votes);
+      async.resolve(votesSubjects);
     }, function (error) {
       $log.error(error);
 

@@ -90,7 +90,30 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   
     // };
   
-  
+  $scope.filterVotes =function(vote)
+  {
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    var todayFix = dd + '/' + mm + '/' + yyyy;
+
+    if (vote.end_date >todayFix)
+    {
+      return true;
+    }
+
+
+
+  }
   
     // $scope.filterMessages = function (message) {
     //   if (message.body) {
@@ -123,11 +146,11 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   
     
     $scope.addVoteSubject = function (vote) {
-      var userId = $scope.currentUser.id;
-      var userCommunity = $scope.currentUser.committee_id;
-      
-      voteService.addVoteSubject(vote).then(function (responseVote) {
-        $scope.votesSubjects=responseVote;
+      var userId = $scope.currentUser().id;
+      var userCommunity = $scope.currentUser().committee_id;
+      vote.committee_id=userCommunity;
+      voteService.addVoteSubject(vote).then(function (responseVotes) {
+        $scope.votesSubjects=responseVotes;
         $scope.vote.start_date = "";
         $scope.vote.end_date = "";
         $scope.vote.subject = "";
@@ -143,7 +166,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   
     $scope.deleteVoteSubject = function (voteId) {
       voteService.deleteVoteSubject(voteId).then(function (responseVotes) {
-        $scope.votesSubjects=responseVote;
+        $scope.votesSubjects=responseVotes;
         // $location.path('/');
       }, function (error) {
   
