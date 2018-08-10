@@ -1,30 +1,40 @@
 app.factory("voteService", function ($http, $log, $q) {
 
   var votes = [];
+  var votesSubjects = [];
   var activeVote = null;
+  var activeVoteSubject = null;
   // var userUrl="https://my-homeownre-db.herokuapp.com/users";
   // var messageUrl="https://my-homeownre-db.herokuapp.com/messages";
   var voteUrl = "https://dovrat-project.herokuapp.com/votes";
+  var voteProposalUrl = "https://dovrat-project.herokuapp.com/proposals";
+  // https://my-homeowner-db.herokuapp.com/users
   // https://my-homeowner-db.herokuapp.com/users
 
-  function Vote(id, start_date, end_date, subject, body, vote_res, user_id, has_been_vote) {
+  function Vote(id, voteSubjectId, vote_res, user_id, has_been_vote) {
     this.id = id;
+    this.voteSubjectId = voteSubjectId;
+    this.vote_res = vote_res;
+    this.user_id = user_id;
+    this.has_been_vote = has_been_vote;
+
+  }
+
+  function Proposal(id, start_date, end_date, subject, body, committee_id) {
+    this.id = id;
+    this.committee_id = committee_id,
     this.start_date = start_date;
     this.end_date = end_date;
     this.subject = subject;
     this.body = body;
-    this.vote_res = vote_res;
-    this.user_id = user_id;
-    this.has_been_vote = has_been_vote;
   }
-
+  
   function deleteVoteSubject(voteId) {
-    var urlToDelete="https://dovrat-project.herokuapp.com/votes/"
+    var urlToDelete = "https://dovrat-project.herokuapp.com/proposals/"
     var async = $q.defer();
     $http.delete(urlToDelete + voteId).then(function (data, status) {
-
-      votes = getAll();
-      async.resolve(votes);
+      votesSubjects = getAll();
+      async.resolve(votesSubjects);
     }, function (error) {
       console.log(error);
       async.reject("failed to load cars.json");
@@ -36,11 +46,10 @@ app.factory("voteService", function ($http, $log, $q) {
 
 
 
-  function addVoteSubject(vote, userId, userCommunity) {
+  function addVoteSubject(voteSubject) {
     var async = $q.defer();
-    vote.end_date = vote.end_date.toLocaleDateString();
-    vote.start_date = vote.start_date.toLocaleDateString();
-    $http.post(voteUrl, vote).then(function (data, status) {
+  
+    $http.post(voteProposalUrl, voteSubject).then(function (data, status) {
       var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
@@ -52,10 +61,10 @@ app.factory("voteService", function ($http, $log, $q) {
         mm = '0' + mm;
       }
       var newDate = dd + '/' + mm + '/' + yyyy;
-      activeVote = new Vote(data.data.id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body, data.data.vote_res, userId, userCommunity);
+      activeVoteSubject = new Proposal(data.data.id,cdata.data.committee_id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body );
 
-      votes.push(activeVote);
-      async.resolve(votes);
+      votesSubjects.push(activeVoteSubject);
+      async.resolve(votesSubjects);
     }, function (error) {
       console.error(error);
       async.reject("failed to load cars.json");
@@ -67,11 +76,10 @@ app.factory("voteService", function ($http, $log, $q) {
 
   function addVote(voteRes, userId, currentVote) {
     var async = $q.defer();
-    var voteObj = new Vote(currentVote.start_date ,currentVote.end_date,currentVote.subject, currentVote.body, voteRes, userId, true );        
+    var voteObj = new Vote(currentVote.voteSubjectId,voteRes, userId, true);
     $http.post(voteUrl, voteObj).then(function (data, status) {
-    var activeVote = new Vote(data.data.id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body, data.data.vote_res, data.data.user_id, data.data.has_been_vote);
-   
-    async.resolve(activeVote);
+      var activeVote = new Vote(data.data.id, data.data.voteSubjectId, data.data.vote_res, data.data.user_id, data.data.has_been_vote);
+      async.resolve(activeVote);
     }, function (error) {
       console.error(error);
       async.reject("failed to load cars.json");
@@ -79,20 +87,7 @@ app.factory("voteService", function ($http, $log, $q) {
 
     return async.promise;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  }
+ }
 
 
 
@@ -110,9 +105,8 @@ app.factory("voteService", function ($http, $log, $q) {
 
   function getAll() {
     var async = $q.defer();
-    $http.get(voteUrl).then(function (response) {
-      votes = response.data;
-
+    $http.get(voteProposalUrl).then(function (response) {
+      votesSubjects = response.data;
 
       async.resolve(votes);
     }, function (error) {
@@ -130,7 +124,7 @@ app.factory("voteService", function ($http, $log, $q) {
 
     getAll: getAll,
     addVoteSubject: addVoteSubject,
-    addVote : addVote,
+    addVote: addVote,
     deleteVoteSubject: deleteVoteSubject
 
   }

@@ -1,6 +1,7 @@
 app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteService, userService) {
 
   $scope.currentVote = null;
+  $scope.votesSubjects=[];
    
   $scope.getCurrentVoteId = function(vote) {
     $scope.currentVote = vote;
@@ -125,13 +126,13 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
       var userId = $scope.currentUser.id;
       var userCommunity = $scope.currentUser.committee_id;
       
-      voteService.addVoteSubject(vote, userId, userCommunity).then(function (responseVote) {
-        $scope.votes = responseVote;
+      voteService.addVoteSubject(vote).then(function (responseVote) {
+        $scope.votesSubjects=responseVote;
         $scope.vote.start_date = "";
         $scope.vote.end_date = "";
         $scope.vote.subject = "";
         $scope.vote.body = "";
-   
+        
       }, function (error) {
   
         $log.error(error);
@@ -142,7 +143,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   
     $scope.deleteVoteSubject = function (voteId) {
       voteService.deleteVoteSubject(voteId).then(function (responseVotes) {
-        $scope.votes = responseVotes;
+        $scope.votesSubjects=responseVote;
         // $location.path('/');
       }, function (error) {
   
@@ -158,7 +159,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   
   
     voteService.getAll().then(function (votes) {
-      $scope.votes = votes;
+      $scope.votesSubjects = votes;
   
     }, function (error) {
       $log.error(error);
