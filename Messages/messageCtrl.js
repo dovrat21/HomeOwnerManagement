@@ -104,27 +104,11 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
 
 
   messageService.getAll().then(function (messages) {
-    $scope.messages = messages;
-
-    //   messages.forEach(function(message) {
-    //    var fromCummunity=message.from;
-    //      $http.get(imageUrl).then(function(response) {
-
-    //    var dogImg = response.data.message[0];
-    //        var dogImgAlt = response.data.message[1];
-
-    //        var dogObj = new Dog(dogType, dogImg, dogImgAlt);
-    //         dogs.push(dogObj);
-
-    //        async.resolve(dogs);
-
-    //  }, function(error) {
-    //    console.error(error);
-    //    async.reject("failed to load cars.json");
-    //  });
-
-    // });
-
+      var currentUsercommunity=$scope.currentUser().committee_id;
+      var relevantmessages = messages.filter(function (el) {
+        return el.committee_id == currentUsercommunity ;
+      });
+      $scope.messages = messages;
   }, function (error) {
     $log.error(error);
   });

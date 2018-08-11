@@ -3,8 +3,7 @@
     <div class="header">
         <div class="row">
             <div class="col-xs-12 col-col-sm-4 col-md-4 title">
-                <h3>{{currentUser().committee_id}}</h3>
-                <h3>הודעות עבור ועד הדרי סמל</h3>
+                <h3>  הודעות עבור {{currentUser().committee_id}}</h3>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 text-left sub-title">
                 <div class="input-group" id="adv-search">
@@ -22,13 +21,13 @@
             </div>
             <div class="col-xs-12 col-col-sm-4 col-md-4 btn-div">
 
-                <button type="button" class="btn btn-warning btn-sm" ng-click="showImportantMessages()">
+                <button type="button" class="btn btn-warning btn-sm msgBtn" ng-click="showImportantMessages()">
                     <span class="white-title">חשוב</span>
                 </button>
-                <button type="button" class="btn btn-success btn-sm" ng-click="showDefaultMessages()">
+                <button type="button" class="btn btn-success btn-sm msgBtn" ng-click="showDefaultMessages()">
                     <span class="white-title">סובל דיחוי</span>
                 </button>
-                <button type="button" class="btn btn-primary btn-sm" ng-click="showAll()">
+                <button type="button" class="btn btn-primary btn-sm msgBtn" ng-click="showAll()">
                     <span class="white-title">כל ההודעות</span>
                 </button>
                

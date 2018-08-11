@@ -1,4 +1,31 @@
-/* Styles go here */
+@media only screen and (max-width: 600px){
+  .profile-usermenu {
+    margin-top: 30px;
+     margin-bottom: 0px !important; 
+    
+}
+/* .tenantDetails{
+  /* margin-bottom:20%; */
+
+
+.cardBtnRow {
+ 
+  position: relative !important;
+}
+.msgBtn{
+  width:65px;
+  font-size:15px;
+
+}
+h3 {
+  font-size: 20px !important;
+}
+.white-title {
+  font-size: 11px !important;
+ 
+}
+}
+
 body {
     font: 18px Montserrat, sans-serif;
     line-height: 1.8;
@@ -42,6 +69,7 @@ i {
 }
 .btn-div{
   padding-top:12px;
+  margin-right: 8px;
 
 
 }
@@ -60,9 +88,13 @@ i {
   padding: 14px;
   
 }
+.cardBtnRow{
+  position: absolute;
+    bottom: 0;
+}
 .card-img-top {
   width: 48% !important;
-  margin-right: 23%;
+ margin:0 auto;
     margin-top: 10%;
   border-top-left-radius: calc(.25rem - 1px);
   border-top-right-radius: calc(.25rem - 1px);
@@ -155,7 +187,7 @@ input[type=file] {
   
 }
 p {font-size: 16px;}
-.margin {margin-bottom: 45px;}
+
 .bg-1 { 
     background-color: #e9ebee;
     color: #5a7391;
@@ -173,10 +205,7 @@ p {font-size: 16px;}
     background-color: #2f2f2f; /* Black Gray */
     color: #fff;
 }
-.container-fluid {
-    padding-top: 70px;
-    padding-bottom: 70px;
-}
+
 .navbar {
     padding-top: 16px;
     padding-bottom: 15px;
@@ -272,6 +301,7 @@ body {
       
   .profile-usermenu {
     margin-top: 30px;
+    margin-bottom: 35%;
   }
   
   .profile-usermenu ul li {

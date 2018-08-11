@@ -3,8 +3,6 @@ app.factory("userService", function($http, $log, $q) {
   var activeUser = null;
     var users = [];
      var userUrl="https://dovrat-project.herokuapp.com/users";
-    // var userUrl="https://my-homeowner-db.herokuapp.com/users";
-    // https://my-homeowner-db.herokuapp.com/users
   
     function User(id,first_name, last_name, email, city , street, house_number, appartment, committee_id, imageUrl, password, password_confirmation, isManager ) {
       this.id=id;
@@ -136,8 +134,8 @@ app.factory("userService", function($http, $log, $q) {
         $http.put(urlToUpdate + userId, updatedUser).then( function(data,status) {
       
       
-       activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, data.data.imageUrl, data.data.password, data.data.password_confirmation, data.data.isManager);
-       activeUser.image_url = data.data.image_url;
+      var  updateUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, data.data.imageUrl, data.data.password, data.data.password_confirmation, data.data.isManager);
+      updateUser.image_url = data.data.image_url;
        users=getAll();
         async.resolve(users);
        async.resolve(activeUser);
