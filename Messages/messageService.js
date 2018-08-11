@@ -35,28 +35,12 @@ function deleteMessage(messageId)
  
 }
 
-
-
-  function addMessage(message, userId, userCommunity) {
+  function addMessage(message) {
     var async = $q.defer();
-
-    $http.post(messageUrl, message).then(function (data, status) {
-
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1; //January is 0!
-      var yyyy = today.getFullYear();
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      var newDate = dd + '/' + mm + '/' + yyyy;
-      activeMessage = new Message(data.data.id, data.data.title, data.data.body, data.data.priority, userId, userCommunity, newDate);
-     
-      messaages.push(activeMessage);
-      async.resolve(messaages);
+       $http.post(messageUrl, message).then(function (data, status) {
+       var activeMessage = new Message(data.data);
+       messaages.push(activeMessage.id);
+       async.resolve(messaages);
     }, function (error) {
       console.error(error);
       async.reject("failed to load cars.json");
@@ -66,21 +50,6 @@ function deleteMessage(messageId)
    
   }
 
-
-
-
-
-  //     function isLoggedIn() {
-  //       return activeUser ? true : false;
-  //   }
-
-  //   function logout() {
-  //       activeUser = null;
-  //   }
-
-  //  function getActiveUser(){
-  //    return activeUser;
-  //  }
 
   function getAll() {
     var async = $q.defer();

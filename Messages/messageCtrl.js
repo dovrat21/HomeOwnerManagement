@@ -59,20 +59,25 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
       }
     }
   }
-
-
-
-
-
+  
   $scope.addMessage = function (message) {
-    var userId = $scope.currentUser.id;
-    var userCommunity = $scope.currentUser.committee_id;
-    messageService.addMessage(message, userId, userCommunity).then(function (responseMessages) {
-      $scope.messages = responseMessages;
-      $scope.message.title = "";
+     var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      var newDate = dd + '/' + mm + '/' + yyyy;
+  
+    messageService.addMessage({title: message.title,body: message.body, priority:message.priority, from: $scope.currentUser().id, committee_id:$scope.currentUser().committee_id,
+      date: newDate}).then(function (responseMessages) {
+        $scope.messages = responseMessages;
+       $scope.message.title = "";
       $scope.message.body = "";
-
-
     }, function (error) {
 
       $log.error(error);

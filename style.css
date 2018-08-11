@@ -148,6 +148,12 @@ border-bottom-left-radius: 4px;
   }
 }
 
+input[type=file] {
+  display: block;
+ 
+  font-size: 14px !important;
+  
+}
 p {font-size: 16px;}
 .margin {margin-bottom: 45px;}
 .bg-1 { 
@@ -280,6 +286,7 @@ body {
     color: #93a3b5 !important;
     font-size: 14px;
     font-weight: 400;
+    padding: 7px;
   }
   
   .profile-usermenu ul li a i {

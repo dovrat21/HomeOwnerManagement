@@ -95,8 +95,7 @@ app.factory("userService", function($http, $log, $q) {
        var async = $q.defer();
   
       $http.post(userUrl,user).then( function(data,status) {
-        
-        // activeUser = new User(data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
+       
         activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
         activeUser.isManager= users.length===0? true: false;
         activeUser.image_url = data.data.image_url;

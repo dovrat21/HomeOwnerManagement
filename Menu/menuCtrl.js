@@ -1,10 +1,8 @@
 app.controller("menuCtrl", function($scope, userService, $location) {
-    $scope.currentUser=userService.getActiveUser();
-   
-    $scope.currentUser=function(){
-        return userService.getActiveUser();
-    }
     
+    
+    $scope.currentUser=userService.getActiveUser();
+
     $scope.isUserLoggedIn = function() {
         return userService.isLoggedIn();
     }
@@ -13,4 +11,12 @@ app.controller("menuCtrl", function($scope, userService, $location) {
         userService.logout();
         $location.path("/");
     }
+
+
+   
+    $scope.currentUser=function(){
+        return userService.getActiveUser();
+    }
+    
+   
 })
