@@ -6,20 +6,30 @@ app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, user
     $scope.invalidLogin = false;
     $scope.activeUser = null;
 
-    $scope.user={};
-    $scope.user.isManager=true;
-  
+    $scope.currentUser = function () {
+        return userService.getActiveUser();
+    }
+
+    $scope.user = {};
+    $scope.user.isManager = true;
+
 
     $scope.signup = function (user) {
+        $scope.invalidLogin = false;
         user.image_url = $scope.image.dataURL;
         $scope.invalidLogin = false;
-        userService.addUser(user).then(function (activeUser) {
-        if (user.isManager!=undefined)
-        {
-            $scope.activeUser = activeUser;
-        }
-           
-            $location.path('/tenantsList');
+        userService.addUser(user).then(function (resUser) {
+        // $scope.activeUser = resUser.id;
+            if ($scope.currentUser() === null)//otherwize he just add other tannent. he is stiil the active user
+            {
+                $scope.activeUser = resUser;
+            }
+            else{
+                $scope.activeUser=$scope.currentUser();
+
+            }
+            $location.path("/");
+            // $location.path('/tenantsList');
         }, function (error) {
             $scope.invalidLogin = true;
             $log.error(error);
@@ -38,7 +48,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, user
         }, function (error) {
             $scope.invalidLogin = true;
             $log.error(error);
-        })
+        });
 
 
         $scope.isLoggedIn = true;

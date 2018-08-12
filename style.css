@@ -4,16 +4,15 @@
   display:none;
 }
 
-
+.nav{
+  display:inline !important;
+}
 
   .profile-usermenu {
     margin-top: 30px;
      margin-bottom: 0px !important; 
     
 }
-/* .tenantDetails{
-  /* margin-bottom:20%; */
-
 
 .cardBtnRow {
  
@@ -39,6 +38,9 @@ body {
           
     text-align: right;
     direction:rtl;
+}
+.nav{
+  display:block !important;
 }
 [class*="col-"]{
   float:right!important;

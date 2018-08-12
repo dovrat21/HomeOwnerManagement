@@ -1,14 +1,10 @@
 app.controller("menuCtrl", function($scope, userService, $location) {
     
    
-    $scope.currentUser=userService.getActiveUser();
+    
 
     $scope.isActive = function (viewLocation) { 
-        // alert(viewLocation);
-        // alert($location.path());
-
-        // return viewLocation === $location.path();
-        return $location.path();
+         return $location.path();
 
     };
 

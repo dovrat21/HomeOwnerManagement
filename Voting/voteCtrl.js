@@ -2,8 +2,8 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
 
   $scope.currentVote = null;
   $scope.votesSubjects = [];
-  $scope.voteIsOver=false;
-  $scope.yetToCome=false
+  $scope.voteIsOver = false;
+  $scope.alreadyVote = false
 
   $scope.votePrerequisite = function (vote) {
     $scope.currentVote = vote;
@@ -20,19 +20,23 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
 
     var todayFix = mm + '/' + dd + '/' + yyyy;
     var a = new Date(todayFix);
-  
-    var b = new Date(vote.end_date.split('/')[1] +"/" + vote.end_date.split('/')[0] + "/" +vote.end_date.split('/')[2]);
 
-    var c = new Date(vote.start_date.split('/')[1] +"/" + vote.start_date.split('/')[0] + "/" +vote.start_date.split('/')[2]);
-  
-    if (a>b)
-    {
-      $scope.voteIsOver=true;
-    }
-    if(c>a){
-      $scope.yetToCome=true;
-    }
+    var b = new Date(vote.end_date.split('/')[1] + "/" + vote.end_date.split('/')[0] + "/" + vote.end_date.split('/')[2]);
 
+    var c = new Date(vote.start_date.split('/')[1] + "/" + vote.start_date.split('/')[0] + "/" + vote.start_date.split('/')[2]);
+
+    if (a > b) {
+      $scope.voteIsOver = true;
+    }
+    else if (c > a) {
+      $scope.yetToCome = true;
+    }
+    else if (vote.has_been_vote){
+      $scope.alreadyVote=true;
+    }
+    else {
+      $scope.addVote(vote)
+    }
   }
 
   $scope.currentUser = function () {
@@ -103,12 +107,12 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
 
   // }
 
- 
+
   $scope.showFutureVotes = function () {
     $scope.query = "futureVotes";
 
   };
-  $scope.showRelevantVotes= function () {
+  $scope.showRelevantVotes = function () {
     $scope.query = "relevant";
 
   };
@@ -118,11 +122,11 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   };
 
   $scope.showOverVotes = function () {
-    $scope.query ="over";
+    $scope.query = "over";
 
   };
- 
- 
+
+
   $scope.filterVotes = function (vote) {
 
     var today = new Date();
@@ -138,26 +142,26 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
 
     var todayFix = mm + '/' + dd + '/' + yyyy;
     var a = new Date(todayFix);
-  
-    var b = new Date(vote.end_date.split('/')[1] +"/" + vote.end_date.split('/')[0] + "/" +vote.end_date.split('/')[2]);
 
-    var c = new Date(vote.start_date.split('/')[1] +"/" + vote.start_date.split('/')[0] + "/" +vote.start_date.split('/')[2]);
-  
+    var b = new Date(vote.end_date.split('/')[1] + "/" + vote.end_date.split('/')[0] + "/" + vote.end_date.split('/')[2]);
+
+    var c = new Date(vote.start_date.split('/')[1] + "/" + vote.start_date.split('/')[0] + "/" + vote.start_date.split('/')[2]);
+
     if ($scope.query == "futureVotes") {
-            if (c>a) {
-              return true;
-            }
-    
-          } else if ($scope.query == "relevant") {
-            if (a<b &&  c<a) {
-              return true;
-            }
-          } else if ($scope.query == "over") {
-            if (a>b) {
-              return true;
-            }
-          }
-    else{
+      if (c > a) {
+        return true;
+      }
+
+    } else if ($scope.query == "relevant") {
+      if (a < b && c < a) {
+        return true;
+      }
+    } else if ($scope.query == "over") {
+      if (a > b) {
+        return true;
+      }
+    }
+    else {
       return true;
     }
 

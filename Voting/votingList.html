@@ -28,7 +28,7 @@
             <li class="list-group-item" ng-repeat="vote in votesSubjects | filter : filterVotes">
                 <div class="row">
                     <div class="col-xs-12 col-col-sm-5 col-md-5 title">
-                        <span ng-click="deleteVoteSubject(vote.id)">
+                        <span ng-show="currentUser().isManager" ng-click="deleteVoteSubject(vote.id)">
                             <i class="fas fa-trash-alt"></i>
                         </span> {{vote.subject}} 
                     </div>
@@ -50,7 +50,7 @@
 
 
     </div>
-    <button type="button" class="btn btn-primary" style="margin-top: 15px; margin: 0 auto; display: flex;" data-toggle="modal"
+    <button type="button"  ng-show="currentUser().isManager" class="btn btn-primary" style="margin-top: 15px; margin: 0 auto; display: flex;" data-toggle="modal"
         data-target="#myModal">
         צור נושא להצבעה
     </button>
@@ -113,6 +113,8 @@
         <div class="modal-content">
             <div class="alert alert-danger" role="alert" ng-show="voteIsOver">
                 מועד ההצבעה הסתיים </div>
+                <div class="alert alert-danger" role="alert" ng-show="alreadyVote">
+                     כבר מימשת את זכות ההצבעה שלך</div>
             <div class="modal-dialog"  ng-hide="voteIsOver">
                     <div class="alert alert-danger" role="alert" ng-show="yetToCome">
                             מועד ההצבעה טרם התחיל </div>

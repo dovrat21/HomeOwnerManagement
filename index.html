@@ -97,7 +97,7 @@
 
 
                 <ul class="nav" ng-show="isUserLoggedIn()">
-                  <li ng-class="{active: isActive('/signUp')=='/signUp'}">
+                  <li ng-show="currentUser().isManager" ng-class="{active: isActive('/signUp')=='/signUp'}">
                     <a href="#!/signUp">
                        הוספת דייר </a>
                   </li>
@@ -146,7 +146,7 @@
             </ul>
             
             <ul class="nav" ng-show="isUserLoggedIn()">
-                <li ng-class="{active: isActive('/signUp')=='/signUp'}">
+                <li ng-show="currentUser().isManager" ng-class="{active: isActive('/signUp')=='/signUp'}">
                   <a href="#!/signUp">
                       <i class="fas fa-user-plus"></i>
                   הוספת דייר </a>

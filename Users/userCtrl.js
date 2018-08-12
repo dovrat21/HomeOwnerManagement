@@ -9,6 +9,10 @@ app.controller("userCtrl", function ($scope, $rootScope, $http, $location, userS
     $scope.currentUser = null;
     $scope.userToUpdate = null;
 
+    $scope.currentUser = function () {
+        return userService.getActiveUser();
+      }
+
 
     $scope.sendUserToUpdate = function (user) {
         $scope.userToUpdate = user;

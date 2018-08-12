@@ -25,7 +25,7 @@
         </ul>
 
       </div>
-      <div class="row cardBtnRow">
+      <div class="row cardBtnRow"  ng-show="currentUser().isManager">
           <div class="col-xs-6 col-sm-6 col-lg-6">
               <button type="button" class="btn btn-primary" style="margin: 15px;  float:right;"  ng-click="sendUserToUpdate(user)" data-toggle="modal"
       data-target="#editUserModal">
