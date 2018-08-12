@@ -6,12 +6,19 @@ app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, user
     $scope.invalidLogin = false;
     $scope.activeUser = null;
 
+    $scope.user={};
+    $scope.user.isManager=true;
+  
 
     $scope.signup = function (user) {
         user.image_url = $scope.image.dataURL;
         $scope.invalidLogin = false;
         userService.addUser(user).then(function (activeUser) {
+        if (user.isManager!=undefined)
+        {
             $scope.activeUser = activeUser;
+        }
+           
             $location.path('/tenantsList');
         }, function (error) {
             $scope.invalidLogin = true;

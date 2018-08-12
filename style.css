@@ -1,4 +1,11 @@
 @media only screen and (max-width: 600px){
+
+.screen{
+  display:none;
+}
+
+
+
   .profile-usermenu {
     margin-top: 30px;
      margin-bottom: 0px !important; 
@@ -28,8 +35,8 @@ h3 {
 
 body {
     font: 18px Montserrat, sans-serif;
-    line-height: 1.8;
-    
+       line-height: 1.8;
+          
     text-align: right;
     direction:rtl;
 }
@@ -82,7 +89,9 @@ i {
   padding-right: 28px;
   padding-left: 20px;
 }
-
+.mainTitle{
+  color:#337ab7;
+}
 .header{
   background-color: #eeeeee;
   padding: 14px;
@@ -155,7 +164,9 @@ border-bottom-left-radius: 4px;
 }
 @media screen and (min-width: 768px) {
 
-
+.mobile{
+  display:none
+}
   .profile-sidebar {
     padding: 20px 0 10px 0;
     background: #fff;

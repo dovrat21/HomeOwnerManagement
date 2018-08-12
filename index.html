@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-
+    <!-- <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet"> -->
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -56,6 +56,7 @@
   
 </head>
 <body>
+    
     <div class="row">
        <div class="col-md-3" ng-controller="menuCtrl" >
         <div class="profile-sidebar">
@@ -76,42 +77,99 @@
              </div>
            
           </div>
+          
+          <div class="mobile profile-usermenu">
+
+              <ul class="nav" ng-hide="isUserLoggedIn()" >
+                  <li ng-class="{active: isActive('/signUp')=='/signUp'}">
+                      <a  href="#!/signUp">
+                         רישום </a>
+                  </li>
+                  <li ng-class="{active: isActive('/login')=='/login'}">
+                    <a  href="#!/login">
+                  
+                    כניסה </a>
+                  </li>
+                 
+                </ul>
+              
+
+
+
+                <ul class="nav" ng-show="isUserLoggedIn()">
+                  <li ng-class="{active: isActive('/signUp')=='/signUp'}">
+                    <a href="#!/signUp">
+                       הוספת דייר </a>
+                  </li>
+                  <li ng-class="{ active: isActive('/tenantsList')=='/tenantsList'}">
+                  
+                      <a  href="#!/tenantsList">
+                         דיירים </a>
+                  </li>
+                  <li ng-class="{ active: isActive('/messagesList')=='/messagesList'}">
+                    <a  href="#!/messagesList">
+                   
+                    הודעות</a>
+                  </li>
+                    <li ng-class="{ active: isActive('/vote')=='/vote'}">
+                 
+                    <a  href="#!/vote">
+                  
+                   הצבעות </a>
+                  </li>
+                  <li >
+                 
+                    <a class="nav-link" href="javascript:void(0)" ng-click="logout()">
+                  
+                   התנתק </a>
+                  </li>
+                </ul>
+            
+          
+          
+          </div>
          
-         
-          <div class="profile-usermenu">
+        
+          <div class="screen profile-usermenu">
             <ul class="nav" ng-hide="isUserLoggedIn()" >
-              <li class="active">
+                <li ng-class="{active: isActive('/signUp')=='/signUp'}">
                   <a href="#!/signUp">
                     <i class="fas fa-sign-in-alt"></i>
                 רישום </a>
               </li>
-              <li>
+              <li ng-class="{active: isActive('/login')=='/login'}">
                 <a href="#!/login">
                 <i class="glyphicon glyphicon-user"></i>
                 כניסה </a>
               </li>
              
             </ul>
+            
             <ul class="nav" ng-show="isUserLoggedIn()">
-                <li class="active">
+                <li ng-class="{active: isActive('/signUp')=='/signUp'}">
                   <a href="#!/signUp">
                       <i class="fas fa-user-plus"></i>
                   הוספת דייר </a>
                 </li>
-                <li>
+                <li ng-class="{ active: isActive('/tenantsList')=='/tenantsList'}">
                     <a href="#!/tenantsList">
                       <i class="fas fa-list-ol"></i>
                   רשימת דיירים </a>
                 </li>
-                <li>
+                <li ng-class="{ active: isActive('/messagesList')=='/messagesList'}">
                   <a href="#!/messagesList">
                     <i class="far fa-comments"></i>
                  רשימת הודעות</a>
                 </li>
-                <li>
+                <li ng-class="{ active: isActive('/vote')=='/vote'}">
                   <a href="#!/vote">
                     <i class="fas fa-balance-scale"></i>
                  הצבעות </a>
+                </li>
+                <li ng-class="{ active: isActive('/vote')=='/vote'}">
+                  <a class="nav-link" href="javascript:void(0)" ng-click="logout()">
+                      <i class="fas fa-sign-out-alt"></i>
+                 התנתק </a>
                 </li>
               </ul>
           </div>

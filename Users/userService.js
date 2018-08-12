@@ -19,8 +19,7 @@ app.factory("userService", function($http, $log, $q) {
       this.password_confirmation = password_confirmation;
       this.isManager = isManager;
     }
-  
-
+   
     function isLoggedIn() {
       return activeUser ? true : false;
   }
@@ -59,8 +58,12 @@ app.factory("userService", function($http, $log, $q) {
 
         var loginURL = userUrl +"?email=" + email + "&password=" + password;
         $http.get(loginURL).then(function(response) {
-            if (response.data.length > 0) {
+           
+          if (response.data.length > 0) { 
+            // if (response.data.length === 0) {
                 activeUser = new User(response.data[0].id, response.data[0].first_name, response.data[0].last_name, response.data[0].email, response.data[0].city, response.data[0].street, response.data[0].house_number,response.data[0].appartment, response.data[0].committee_id, " ", response.data[0].password,response.data[0].password_confirmation, response.data[0].isManager);
+                activeUser.image_url = response.data[0].image_url;
+                // activeUser = new User(0, "דוברת", "dov@gmail", "נס ציונה", "העוגן ", "3","8", "ועד הדרי סמל", " ", "1","1", true);
                 activeUser.image_url = response.data[0].image_url;
                 async.resolve(activeUser);
             } else {
@@ -94,11 +97,11 @@ app.factory("userService", function($http, $log, $q) {
   
       $http.post(userUrl,user).then( function(data,status) {
        
-        activeUser = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
-        activeUser.isManager= users.length===0? true: false;
-        activeUser.image_url = data.data.image_url;
-        users.push(activeUser);
-        async.resolve(activeUser);
+        var userToAdd = new User(data.data.id, data.data.first_name, data.data.last_name, data.data.email, data.data.city, data.data.street, data.data.house_number, data.data.appartment, data.data.committee_id, " ", data.data.password, data.data.password_confirmation, data.data.isManager);
+        userToAdd.isManager= users.length===0? true: false;
+        userToAdd.image_url = data.data.image_url;
+        users.push(userToAdd);
+        async.resolve(userToAdd);
       }, function(error) {
         console.error(error);
         async.reject("failed to load cars.json");
