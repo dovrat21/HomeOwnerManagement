@@ -3,7 +3,8 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   $scope.currentVote = null;
   $scope.votesSubjects = [];
   $scope.voteIsOver = false;
-  $scope.alreadyVote = false
+  $scope.alreadyVote = false;
+  $scope.test ="dovrat";
 
   $scope.votePrerequisite = function (vote) {
     $scope.currentVote = vote;
