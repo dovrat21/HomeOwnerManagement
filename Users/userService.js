@@ -40,8 +40,8 @@ app.factory("userService", function ($http, $log, $q) {
       var relevantUsers = users.filter(function (el) {
         return el.committee_id == currentUsercommunity;
       });
-
       async.resolve(relevantUsers);
+            
     }, function (error) {
       $log.error(error);
 

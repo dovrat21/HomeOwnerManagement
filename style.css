@@ -39,9 +39,9 @@ body {
     text-align: right;
     direction:rtl;
 }
-.nav{
+/* .nav{
   display:block !important;
-}
+} */
 [class*="col-"]{
   float:right!important;
 

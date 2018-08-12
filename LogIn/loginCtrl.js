@@ -28,8 +28,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, user
                 $scope.activeUser=$scope.currentUser();
 
             }
-            $location.path("/");
-            // $location.path('/tenantsList');
+           $location.path('/tenantsList');
         }, function (error) {
             $scope.invalidLogin = true;
             $log.error(error);

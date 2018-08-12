@@ -9,12 +9,7 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
   }
 
   $scope.query = "";
-   // $scope.orderByDate = function() {
-  //   $scope.messages.sort(function(a, b) {
-  //     return (new Date(b.date)) - (new Date(a.date))
-  //   })
-
-  // }
+  
 
   $scope.showImportantMessages = function () {
     $scope.query = "important";
@@ -86,8 +81,8 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
 
   };
 
-  $scope.deleteMessage = function (messageId) {
-    messageService.deleteMessage(messageId).then(function (responseMessages) {
+  $scope.deleteMessage = function (message) {
+    messageService.deleteMessage(message).then(function (responseMessages) {
       $scope.messages = responseMessages;
       // $location.path('/');
     }, function (error) {
@@ -103,7 +98,7 @@ app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, me
 
 
 
-  messageService.getAll().then(function (messages) {
+  messageService.getAll($scope.currentUser().committee_id).then(function (messages) {
       var currentUsercommunity=$scope.currentUser().committee_id;
       var relevantmessages = messages.filter(function (el) {
         return el.committee_id == currentUsercommunity ;

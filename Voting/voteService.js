@@ -30,11 +30,11 @@ app.factory("voteService", function ($http, $log, $q) {
 
   }
 
-  function deleteVoteSubject(voteId) {
+  function deleteVoteSubject(vote) {
     var urlToDelete = "https://dovrat-project.herokuapp.com/proposals/"
     var async = $q.defer();
-    $http.delete(urlToDelete + voteId).then(function (data, status) {
-      votesSubjects = getAll();
+    $http.delete(urlToDelete + vote.id).then(function (data, status) {
+      votesSubjects = getAll(vote.committee_id);
       async.resolve(votesSubjects);
     }, function (error) {
       console.log(error);
@@ -49,7 +49,7 @@ app.factory("voteService", function ($http, $log, $q) {
 
   function addVoteSubject(voteSubject) {
     var async = $q.defer();
-   
+
     var dd = voteSubject.start_date.getDate();
     var mm = voteSubject.start_date.getMonth() + 1; //January is 0!
     var yyyy = voteSubject.start_date.getFullYear();
@@ -71,14 +71,16 @@ app.factory("voteService", function ($http, $log, $q) {
       mm = '0' + mm;
     }
     var newendDate = dd + '/' + mm + '/' + yyyy;
-    voteSubject.start_date= newstartDate;
+    voteSubject.start_date = newstartDate;
     voteSubject.end_date = newendDate;
 
     $http.post(voteProposalUrl, voteSubject).then(function (data, status) {
-    activeVoteSubject = new Proposal(data.data.id, data.data.committee_id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body);
-
-      votesSubjects.push(activeVoteSubject);
-      async.resolve(votesSubjects);
+      activeVoteSubject = new Proposal(data.data.id, data.data.committee_id, data.data.start_date, data.data.end_date, data.data.subject, data.data.body);
+      var relevant_Subject = votesSubjects.filter(function (el) {
+        return el.committee_id == voteSubject.committee_id;
+      });
+      relevant_Subject.push(activeVoteSubject);
+      async.resolve(relevant_Subject);
     }, function (error) {
       console.error(error);
       async.reject("failed to load cars.json");
@@ -106,25 +108,18 @@ app.factory("voteService", function ($http, $log, $q) {
 
 
 
-  //     function isLoggedIn() {
-  //       return activeUser ? true : false;
-  //   }
-
-  //   function logout() {
-  //       activeUser = null;
-  //   }
-
- 
 
   function getAll(committee_id) {
     var async = $q.defer();
     $http.get(voteProposalUrl).then(function (response) {
-      
+
       votesSubjects = response.data;
-       var relevantSubject = votesSubjects.filter(function (el) {
-        return el.committee_id == committee_id ;
+      var relevantSubject = votesSubjects.filter(function (el) {
+        return el.committee_id == committee_id;
       });
       async.resolve(relevantSubject);
+
+
     }, function (error) {
       $log.error(error);
 

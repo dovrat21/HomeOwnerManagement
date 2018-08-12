@@ -33,6 +33,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     }
     else if (vote.has_been_vote){
       $scope.alreadyVote=true;
+
     }
     else {
       $scope.addVote(vote)
@@ -49,7 +50,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     var userId = $scope.currentUser().id;
     var currentVote = $scope.currentVote;
     voteService.addVote(voteRes, userId, currentVote).then(function (responseVote) {
-      // $scope.votes = responseVote;
+    // $scope.votes = responseVote;
 
     }, function (error) {
 
@@ -175,6 +176,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     vote.committee_id = userCommunity;
     voteService.addVoteSubject(vote).then(function (responseVotes) {
       $scope.votesSubjects = responseVotes;
+      $location.path('/vote');
       $scope.vote.start_date = "";
       $scope.vote.end_date = "";
       $scope.vote.subject = "";
@@ -185,19 +187,19 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
       $log.error(error);
     });
 
-
+    $location.path('/vote');
   };
 
-  $scope.deleteVoteSubject = function (voteId) {
-    voteService.deleteVoteSubject(voteId).then(function (responseVotes) {
+  $scope.deleteVoteSubject = function (vote) {
+    voteService.deleteVoteSubject(vote).then(function (responseVotes) {
       $scope.votesSubjects = responseVotes;
-      // $location.path('/');
+    $location.path('/vote');
     }, function (error) {
 
       $log.error(error);
     });
 
-
+    $scope.votesSubjects = responseVotes;
   };
 
 

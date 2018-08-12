@@ -28,7 +28,7 @@
             <li class="list-group-item" ng-repeat="vote in votesSubjects | filter : filterVotes">
                 <div class="row">
                     <div class="col-xs-12 col-col-sm-5 col-md-5 title">
-                        <span ng-show="currentUser().isManager" ng-click="deleteVoteSubject(vote.id)">
+                        <span ng-show="currentUser().isManager" ng-click="deleteVoteSubject(vote)">
                             <i class="fas fa-trash-alt"></i>
                         </span> {{vote.subject}} 
                     </div>
