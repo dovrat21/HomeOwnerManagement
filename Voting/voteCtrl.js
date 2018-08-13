@@ -10,58 +10,66 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   $scope.labels = ["בעד", "נגד", "נמנע"];
   $scope.options = { legend: { display: true } };
   $scope.data = [];
-  $scope.votesss = [{
-    "id": 1,
-    "voteSubjectId": "0",
-    "vote_res": "Avoid",
-    "user_id": 0,
-    "has_been_vote": "true"
-  }, {
-    "id": 1,
-    "voteSubjectId": "0",
-    "vote_res": "Reject",
-    "user_id": 0,
-    "has_been_vote": "true"
-  }, {
-    "id": 1,
-    "voteSubjectId": "0",
-    "vote_res": "Agree",
-    "user_id": 0,
-    "has_been_vote": "true"
-  }, {
-    "id": 1,
-    "voteSubjectId": "0",
-    "vote_res": "Reject",
-    "user_id": 0,
-    "has_been_vote": "true"
-  }, {
-    "id": 1,
-    "voteSubjectId": "0",
-    "vote_res": "Agree",
-    "user_id": 0,
-    "has_been_vote": "true"
-  }];
+  // $scope.votesss = [{
+  //   "id": 1,
+  //   "voteSubjectId": "0",
+  //   "vote_res": "Avoid",
+  //   "user_id": 0,
+  //   "has_been_vote": "true"
+  // }, {
+  //   "id": 1,
+  //   "voteSubjectId": "0",
+  //   "vote_res": "Reject",
+  //   "user_id": 0,
+  //   "has_been_vote": "true"
+  // }, {
+  //   "id": 1,
+  //   "voteSubjectId": "0",
+  //   "vote_res": "Agree",
+  //   "user_id": 0,
+  //   "has_been_vote": "true"
+  // }, {
+  //   "id": 1,
+  //   "voteSubjectId": "0",
+  //   "vote_res": "Reject",
+  //   "user_id": 0,
+  //   "has_been_vote": "true"
+  // }, {
+  //   "id": 1,
+  //   "voteSubjectId": "0",
+  //   "vote_res": "Agree",
+  //   "user_id": 0,
+  //   "has_been_vote": "true"
+  // }];
 
 
   $scope.updateChart = function () {
     var agree = 0;
     var reject = 0;
     var avoid = 0;
-    var allVotes=null;
+    var allVotes = null;
 
 
-      var committee_id= $scope.currentUser().committee_id;
-      voteService.getAllVotes().then(function (votes) {
-        allVotes = votes;
-         var relevantVote = allVotes.filter(function (el) {
-        return el.committee_id == committee_id;
+    // var committee_id= $scope.currentUser().committee_id;
+    // var allVotes=$scope.votes;
+    if ($scope.votes.length > 0) {
+      alert($scope.votes.length);
+      var relevantVote = $scope.votes.filter(function (el) {
+        return el.committee_id == $scope.currentUser().committee_id;
       });
-  
-      }, function (error) {
-        $log.error(error);
-      });
-  
+     
    
+   
+   
+    }
+
+   
+
+    // }, function (error) {
+    //   $log.error(error);
+    // });
+
+
 
     // for (var i = 0; i < $scope.votesss.length; i++) {
     //   if ($scope.votesss[i].vote_res === "Agree") {
@@ -124,7 +132,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     var voteRes = vote;
     var userId = $scope.currentUser().id;
     var currentVote = $scope.currentVote;
-    voteService.addVote({ voteSubjectId: currentVote.id, vote_res: voteRes, user_id: userId, committee_id:currentVote.committee_id, has_been_vote: true }).then(function (responseVotes) {
+    voteService.addVote({ voteSubjectId: currentVote.id, vote_res: voteRes, user_id: userId, committee_id: currentVote.committee_id, has_been_vote: true }).then(function (responseVotes) {
       $scope.votes = responseVote;
 
     }, function (error) {
@@ -270,7 +278,11 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     $scope.votesSubjects = responseVotes;
   };
 
-
+  voteService.getAllVotes().then(function (votes) {
+    $scope.votes = votes;
+  }, function (error) {
+    $log.error(error);
+  });
   // $scope.getAllVotes = function () {
   //   // $scope.currentUser().committee_id
   //   voteService.getAllVotes().then(function (votes) {
@@ -283,8 +295,6 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
 
 
   // };
-
-
 
   voteService.getAll($scope.currentUser().committee_id).then(function (votes) {
     $scope.votesSubjects = votes;
