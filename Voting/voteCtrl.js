@@ -10,80 +10,42 @@ app.controller("voteCtrl", function ($scope,$log, $rootScope, $http, $location, 
   $scope.labels = ["בעד", "נגד", "נמנע"];
   $scope.options = { legend: { display: true } };
   $scope.data = [];
-  // $scope.votesss = [{
-  //   "id": 1,
-  //   "voteSubjectId": "0",
-  //   "vote_res": "Avoid",
-  //   "user_id": 0,
-  //   "has_been_vote": "true"
-  // }, {
-  //   "id": 1,
-  //   "voteSubjectId": "0",
-  //   "vote_res": "Reject",
-  //   "user_id": 0,
-  //   "has_been_vote": "true"
-  // }, {
-  //   "id": 1,
-  //   "voteSubjectId": "0",
-  //   "vote_res": "Agree",
-  //   "user_id": 0,
-  //   "has_been_vote": "true"
-  // }, {
-  //   "id": 1,
-  //   "voteSubjectId": "0",
-  //   "vote_res": "Reject",
-  //   "user_id": 0,
-  //   "has_been_vote": "true"
-  // }, {
-  //   "id": 1,
-  //   "voteSubjectId": "0",
-  //   "vote_res": "Agree",
-  //   "user_id": 0,
-  //   "has_been_vote": "true"
-  // }];
+ 
 
 
-  $scope.updateChart = function () {
+  $scope.updateChart = function (vote) {
     var agree = 0;
     var reject = 0;
     var avoid = 0;
     var allVotes = null;
+    var relevantVote=null;
 
-
-    // var committee_id= $scope.currentUser().committee_id;
-    // var allVotes=$scope.votes;
-    if ($scope.votes.length > 0) {
-      alert($scope.votes.length);
-      var relevantVote = $scope.votes.filter(function (el) {
-        return el.committee_id == $scope.currentUser().committee_id;
+    
+    // if ($scope.votes.length > 0) {
+     
+       relevantVote = $scope.votes.filter(function (el) {
+        return el.committee_id == vote.committee_id;
       });
      
-   
-   
-   
-    }
-
-   
-
-    // }, function (error) {
-    //   $log.error(error);
-    // });
 
 
 
-    // for (var i = 0; i < $scope.votesss.length; i++) {
-    //   if ($scope.votesss[i].vote_res === "Agree") {
-    //     ++agree;
-    //   } else if ($scope.votesss[i].vote_res === "Avoid") {
-    //     ++avoid
-    //   }
-    //   else {
-    //     reject++;
-    //   }
-    // }
+//  for (var i = 0; i < relevantVote.length; i++) {
+//       if (relevantVote[i].vote_res === "Agree") {
+//         ++agree;
+//       } else if (relevantVote[i].vote_res === "Avoid") {
+//         ++avoid
+//       }
+//       else {
+//         reject++;
+//       }
+//     }
 
-    // return [agree, avoid,reject];
+//     return [agree, avoid,reject];
+
+
   };
+
 
 
   $scope.votePrerequisite = function (vote) {
@@ -112,13 +74,13 @@ app.controller("voteCtrl", function ($scope,$log, $rootScope, $http, $location, 
     if (a > b) {
       $scope.voteIsOver = true;
     }
-    else if (c > a) {
+    if (c > a) {
       $scope.yetToCome = true;
     }
-    else if (vote.has_been_vote) {
-      $scope.alreadyVote = true;
+    // else if (vote.has_been_vote) {
+    //   $scope.alreadyVote = true;
 
-    }
+    // }
 
   }
 

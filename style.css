@@ -25,6 +25,7 @@
 }
 h3 {
   font-size: 20px !important;
+  color: #5a7391;
 }
 .white-title {
   font-size: 11px !important;
@@ -35,10 +36,21 @@ h3 {
 body {
     font: 18px Montserrat, sans-serif;
        line-height: 1.8;
-          
-    text-align: right;
+      text-align: right;
     direction:rtl;
 }
+.fas fa-chart-pie{
+  color:#007bff;
+}
+.fas fa-trash-alt{
+  color:#eea236;
+}
+.fas fa-hand-paper{
+  color:#5cb85c;
+}
+
+
+
 .ul {
   list-style: none !important;
 }
@@ -56,6 +68,16 @@ i {
   margin-left: 10px;
   font-size:18px;
 }
+i.fas.fa-chart-pie{
+  color:#007bff;
+}
+i.fas.fa-trash-alt{
+  color:#eea236;
+}
+i.fas.fa-hand-paper{
+  color:#5cb85c;
+}
+
 .voteBtnOpt{
   margin: 0 auto;
   width: 46%;
@@ -73,13 +95,16 @@ i {
 .title{
   font-size: 16px;
   font-weight: 500;
-  color: #262626;
+  color:#337ab7;
+ 
+ 
 
 }
 .sub-title{
   font-size: 14px;
   font-weight: normal;
-  color: rgba(0, 0, 0, 0.8);
+   color: #5a7391;
+ 
 
 }
 .btn-div{
@@ -113,6 +138,7 @@ i {
   width: 48% !important;
  margin:0 auto;
     margin-top: 10%;
+    margin-bottom: 15px;
   border-top-left-radius: calc(.25rem - 1px);
   border-top-right-radius: calc(.25rem - 1px);
 }
@@ -323,6 +349,7 @@ body {
     margin-bottom: 35%;
     width: 90%;
     margin: 0 auto;
+    color: rgb(90, 115, 145);
   }
   
   .profile-usermenu ul li {
@@ -334,7 +361,7 @@ body {
   }
   
   .profile-usermenu ul li a {
-    color: #93a3b5 !important;
+    /* color: #93a3b5 !important; */
     font-size: 14px;
     font-weight: 400;
     padding: 7px;
@@ -375,6 +402,7 @@ body {
 
   .tenantDetails{
     list-style: none;
+    margin-bottom:20%;
   }
   .panel-heading {
     padding: 5px 15px;
@@ -463,3 +491,4 @@ body {
     text-align:center;
 
 }
+

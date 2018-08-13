@@ -33,10 +33,7 @@ app.config(function($routeProvider) {
     controller: 'voteCtrl'
     
   })
-//      .when('/movies/:movieId', {
-//     templateUrl: 'Movies/movieDetail.html',
-//     controller: 'movieDetailsCtrl'
-//   })
+
   
   .otherwise({
     redirectTo: '/'
