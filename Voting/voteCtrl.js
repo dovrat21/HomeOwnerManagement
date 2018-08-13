@@ -1,4 +1,4 @@
-app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteService, userService) {
+app.controller("voteCtrl", function ($scope,$log, $rootScope, $http, $location, voteService, userService) {
 
   $scope.currentVote = null;
   $scope.votesSubjects = [];

@@ -1,4 +1,4 @@
-app.controller("messageCtrl", function ($scope, $rootScope, $http, $location, messageService, userService) {
+app.controller("messageCtrl", function ($scope,$log, $rootScope, $http, $location, messageService, userService) {
 
 
 

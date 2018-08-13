@@ -1,4 +1,4 @@
-app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, userService) {
+app.controller("loginCtrl", function ($scope,$log, $rootScope, $http, $location, userService) {
 
 
     $scope.email = "";
@@ -28,7 +28,8 @@ app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, user
                 $scope.activeUser=$scope.currentUser();
 
             }
-           $location.path('/tenantsList');
+        //    $location.path('/tenantsList');dovratttttttttttttttttttttttttttttttt
+        $location.path('tenantsList');
         }, function (error) {
             $scope.invalidLogin = true;
             $log.error(error);
@@ -43,7 +44,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $http, $location, user
         $scope.invalidLogin = false;
         userService.login($scope.email, $scope.password).then(function (activeUser) {
             $scope.activeUser = activeUser;
-            $location.path("/");
+            // $location.path("/");dovratttttttttttttttttttttttttttttttt
         }, function (error) {
             $scope.invalidLogin = true;
             $log.error(error);

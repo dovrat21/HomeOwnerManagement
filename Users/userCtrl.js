@@ -1,5 +1,5 @@
 
-app.controller("userCtrl", function ($scope, $rootScope, $http, $location, userService) {
+app.controller("userCtrl", function ($scope,$log, $rootScope, $http, $location, userService) {
 
 
 

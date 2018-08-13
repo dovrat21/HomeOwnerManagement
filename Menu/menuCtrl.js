@@ -1,4 +1,4 @@
-app.controller("menuCtrl", function($scope, userService, $location) {
+app.controller("menuCtrl", function($scope,$log, userService, $location) {
     
    
     
