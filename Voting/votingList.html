@@ -59,11 +59,10 @@
     <!-- <button type="button"   class="btn btn-primary" ng-click="updateChart()">
 צפה בתוצאות ההצבעה</button>  -->
 
-     <canvas id="pie" class="chart chart-pie"
-      chart-data="updateChart()" chart-labels="labels" chart-options="options">
-    </canvas> 
+    <canvas id="pie" class="chart chart-pie" chart-data="updateChart()" chart-labels="labels" chart-options="options">
+    </canvas>
 
-    <!-- <div class="modal" id="myModal">
+    <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form role="form">
@@ -115,28 +114,34 @@
     </div>
 
     <div class="modal" id="voteModal">
+        <div class="alert alert-danger" role="alert" ng-show="voteIsOver">
+            מועד ההצבעה הסתיים </div> 
+        <!-- <div class="alert alert-danger" role="alert" ng-show="alreadyVote">
+            כבר מימשת את זכות ההצבעה שלך</div> -->
+            <!-- <div class="alert alert-danger" role="alert" ng-show="yetToCome">
+                    מועד ההצבעה טרם התחיל </div> -->
         <div class="modal-dialog">
             <div class="modal-content">
                 <form role="form">
-                        <h2>{{currentVote.subject}}</h2>
-                        <h3>{{currentVote.body}}</h3>
+                    <h2>{{currentVote.subject}}</h2>
+                    <h3>{{currentVote.body}}</h3>
 
-                        <hr />
-                        <div ng-init="vote.priority=default">
-                            <div class="voteBtnOpt">
-                                <label class="btn btn-danger" ng-model="vote.vote_res" value="reject" uib-btn-radio="'Reject'">מתנגד</label>
-                                <label class="btn btn-primary" ng-model="vote.vote_res" value="avoid" uib-btn-radio="'Avoid'">נמנע</label>
-                                <label class="btn btn-success" ng-model="vote.vote_res" value="agree" uib-btn-radio="'Agree'">מסכים</label>
+                    <hr />
+                    <div ng-init="vote.priority=default">
+                        <div class="voteBtnOpt">
+                            <label class="btn btn-danger" ng-model="vote.vote_res" value="reject" uib-btn-radio="'Reject'">מתנגד</label>
+                            <label class="btn btn-primary" ng-model="vote.vote_res" value="avoid" uib-btn-radio="'Avoid'">נמנע</label>
+                            <label class="btn btn-success" ng-model="vote.vote_res" value="agree" uib-btn-radio="'Agree'">מסכים</label>
 
-                            </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" ng-click="addVote(vote.vote_res)" class="btn btn-primary center center" data-dismiss="modal">שלח</button>
-                    </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" ng-click="addVote(vote.vote_res)" class="btn btn-primary center center" data-dismiss="modal">שלח</button>
+                        </div>
                 </form>
+                </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -151,16 +156,16 @@
 
 
 
-    <div class="modal" id="voteModal">
+        <div class="modal" id="voteModal">
 
 
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="modal-content"> -->
-            <!-- <div class="alert alert-danger" role="alert" ng-show="voteIsOver">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-content"> -->
+                <!-- <div class="alert alert-danger" role="alert" ng-show="voteIsOver">
                 מועד ההצבעה הסתיים </div> -->
-            <!-- <div class="alert alert-danger" role="alert" ng-show="alreadyVote">
+                <!-- <div class="alert alert-danger" role="alert" ng-show="alreadyVote">
                 כבר מימשת את זכות ההצבעה שלך</div> -->
-            <!-- <div class="modal-dialog" ng-hide="voteIsOver">
+                <!-- <div class="modal-dialog" ng-hide="voteIsOver">
                 <div class="alert alert-danger" role="alert" ng-show="yetToCome">
                     מועד ההצבעה טרם התחיל </div>
                 <div class="modal-dialog" ng-hide="voteIsOver">
@@ -192,4 +197,4 @@
 
 
     </div> -->
-</div>
+            </div>

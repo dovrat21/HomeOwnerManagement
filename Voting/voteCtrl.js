@@ -47,24 +47,42 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     var agree = 0;
     var reject = 0;
     var avoid = 0;
+    var allVotes=null;
 
-    for (var i = 0; i < $scope.votesss.length; i++) {
-      if ($scope.votesss[i].vote_res === "Agree") {
-        ++agree;
-      } else if ($scope.votesss[i].vote_res === "Avoid") {
-        ++avoid
-      }
-      else {
-        reject++;
-      }
-    }
 
-    return [agree, avoid,reject];
+      var committee_id= $scope.currentUser().committee_id;
+      voteService.getAllVotes().then(function (votes) {
+        allVotes = votes;
+         var relevantVote = allVotes.filter(function (el) {
+        return el.committee_id == committee_id;
+      });
+  
+      }, function (error) {
+        $log.error(error);
+      });
+  
+   
+
+    // for (var i = 0; i < $scope.votesss.length; i++) {
+    //   if ($scope.votesss[i].vote_res === "Agree") {
+    //     ++agree;
+    //   } else if ($scope.votesss[i].vote_res === "Avoid") {
+    //     ++avoid
+    //   }
+    //   else {
+    //     reject++;
+    //   }
+    // }
+
+    // return [agree, avoid,reject];
   };
 
 
   $scope.votePrerequisite = function (vote) {
     $scope.currentVote = vote;
+    $scope.voteIsOver = false;
+    $scope.yetToCome = false;
+    $scope.alreadyVote = false;
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -106,7 +124,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     var voteRes = vote;
     var userId = $scope.currentUser().id;
     var currentVote = $scope.currentVote;
-    voteService.addVote({ voteSubjectId: currentVote.id, vote_res: voteRes, user_id: userId, has_been_vote: true }).then(function (responseVotes) {
+    voteService.addVote({ voteSubjectId: currentVote.id, vote_res: voteRes, user_id: userId, committee_id:currentVote.committee_id, has_been_vote: true }).then(function (responseVotes) {
       $scope.votes = responseVote;
 
     }, function (error) {
@@ -253,18 +271,18 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   };
 
 
-  $scope.getAllVotes = function () {
-    // $scope.currentUser().committee_id
-    voteService.getAllVotes().then(function (votes) {
-      $scope.votes = votes;
+  // $scope.getAllVotes = function () {
+  //   // $scope.currentUser().committee_id
+  //   voteService.getAllVotes().then(function (votes) {
+  //     $scope.votes = votes;
 
-    }, function (error) {
-      $log.error(error);
-    });
+  //   }, function (error) {
+  //     $log.error(error);
+  //   });
 
 
 
-  };
+  // };
 
 
 

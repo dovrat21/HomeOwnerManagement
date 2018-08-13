@@ -7,11 +7,12 @@ app.factory("voteService", function ($http, $log, $q) {
     var voteUrl = "https://dovrat-project.herokuapp.com/votes";
   var voteProposalUrl = "https://dovrat-project.herokuapp.com/proposals";
   
-  function Vote(id, voteSubjectId, vote_res, user_id, has_been_vote) {
+  function Vote(id, voteSubjectId, vote_res, user_id,committee_id, has_been_vote) {
     this.id = id;
     this.voteSubjectId = voteSubjectId;
     this.vote_res = vote_res;
     this.user_id = user_id;
+    this.committee_id =committee_id;
     this.has_been_vote = has_been_vote;
 
   }
