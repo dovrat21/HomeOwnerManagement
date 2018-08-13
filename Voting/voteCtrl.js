@@ -2,9 +2,66 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
 
   $scope.currentVote = null;
   $scope.votesSubjects = [];
+  $scope.votes = [];
   $scope.voteIsOver = false;
   $scope.alreadyVote = false;
-  $scope.test ="dovrat";
+
+
+  $scope.labels = ["בעד", "נגד", "נמנע"];
+  $scope.options = { legend: { display: true } };
+  $scope.data = [];
+  $scope.votesss = [{
+    "id": 1,
+    "voteSubjectId": "0",
+    "vote_res": "Avoid",
+    "user_id": 0,
+    "has_been_vote": "true"
+  }, {
+    "id": 1,
+    "voteSubjectId": "0",
+    "vote_res": "Reject",
+    "user_id": 0,
+    "has_been_vote": "true"
+  }, {
+    "id": 1,
+    "voteSubjectId": "0",
+    "vote_res": "Agree",
+    "user_id": 0,
+    "has_been_vote": "true"
+  }, {
+    "id": 1,
+    "voteSubjectId": "0",
+    "vote_res": "Reject",
+    "user_id": 0,
+    "has_been_vote": "true"
+  }, {
+    "id": 1,
+    "voteSubjectId": "0",
+    "vote_res": "Agree",
+    "user_id": 0,
+    "has_been_vote": "true"
+  }];
+
+
+  $scope.updateChart = function () {
+    var agree = 0;
+    var reject = 0;
+    var avoid = 0;
+
+    for (var i = 0; i < $scope.votesss.length; i++) {
+      if ($scope.votesss[i].vote_res === "Agree") {
+        ++agree;
+      } else if ($scope.votesss[i].vote_res === "Avoid") {
+        ++avoid
+      }
+      else {
+        reject++;
+      }
+    }
+
+    return [agree, avoid,reject];
+  };
+
 
   $scope.votePrerequisite = function (vote) {
     $scope.currentVote = vote;
@@ -32,26 +89,25 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     else if (c > a) {
       $scope.yetToCome = true;
     }
-    else if (vote.has_been_vote){
-      $scope.alreadyVote=true;
+    else if (vote.has_been_vote) {
+      $scope.alreadyVote = true;
 
     }
-    else {
-      $scope.addVote(vote)
-    }
+
   }
 
   $scope.currentUser = function () {
     return userService.getActiveUser();
+
   }
 
 
-  $scope.addVote = function (currentVote) {
-    var voteRes = currentVote;
+  $scope.addVote = function (vote) {
+    var voteRes = vote;
     var userId = $scope.currentUser().id;
     var currentVote = $scope.currentVote;
-    voteService.addVote(voteRes, userId, currentVote).then(function (responseVote) {
-    // $scope.votes = responseVote;
+    voteService.addVote({ voteSubjectId: currentVote.id, vote_res: voteRes, user_id: userId, has_been_vote: true }).then(function (responseVotes) {
+      $scope.votes = responseVote;
 
     }, function (error) {
 
@@ -101,13 +157,6 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
     opened: false
   };
 
-
-  // $scope.orderByDate = function() {
-  //   $scope.messages.sort(function(a, b) {
-  //     return (new Date(b.date)) - (new Date(a.date))
-  //   })
-
-  // }
 
 
   $scope.showFutureVotes = function () {
@@ -194,7 +243,7 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   $scope.deleteVoteSubject = function (vote) {
     voteService.deleteVoteSubject(vote).then(function (responseVotes) {
       $scope.votesSubjects = responseVotes;
-    $location.path('/vote');
+      $location.path('/vote');
     }, function (error) {
 
       $log.error(error);
@@ -204,7 +253,18 @@ app.controller("voteCtrl", function ($scope, $rootScope, $http, $location, voteS
   };
 
 
+  $scope.getAllVotes = function () {
+    // $scope.currentUser().committee_id
+    voteService.getAllVotes().then(function (votes) {
+      $scope.votes = votes;
 
+    }, function (error) {
+      $log.error(error);
+    });
+
+
+
+  };
 
 
 

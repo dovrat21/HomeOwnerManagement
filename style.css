@@ -4,9 +4,9 @@
   display:none;
 }
 
-.nav{
+/* .nav{
   display:inline !important;
-}
+} */
 
   .profile-usermenu {
     margin-top: 30px;
@@ -38,6 +38,12 @@ body {
           
     text-align: right;
     direction:rtl;
+}
+.ul {
+  list-style: none !important;
+}
+.navScreenList{
+  display: inline !important;
 }
 /* .nav{
   display:block !important;
@@ -315,6 +321,8 @@ body {
   .profile-usermenu {
     margin-top: 30px;
     margin-bottom: 35%;
+    width: 90%;
+    margin: 0 auto;
   }
   
   .profile-usermenu ul li {

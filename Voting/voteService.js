@@ -4,13 +4,9 @@ app.factory("voteService", function ($http, $log, $q) {
   var votesSubjects = [];
   var activeVote = null;
   var activeVoteSubject = null;
-  // var userUrl="https://my-homeownre-db.herokuapp.com/users";
-  // var messageUrl="https://my-homeownre-db.herokuapp.com/messages";
-  var voteUrl = "https://dovrat-project.herokuapp.com/votes";
+    var voteUrl = "https://dovrat-project.herokuapp.com/votes";
   var voteProposalUrl = "https://dovrat-project.herokuapp.com/proposals";
-  // https://my-homeowner-db.herokuapp.com/users
-  // https://my-homeowner-db.herokuapp.com/users
-
+  
   function Vote(id, voteSubjectId, vote_res, user_id, has_been_vote) {
     this.id = id;
     this.voteSubjectId = voteSubjectId;
@@ -90,13 +86,12 @@ app.factory("voteService", function ($http, $log, $q) {
 
   }
 
-  function addVote(voteRes, userId, currentVote) {
+  function addVote(vote) {
     var async = $q.defer();
-    var voteObj = new Vote(currentVote.voteSubjectId, voteRes, userId, true);
-
-    $http.post(voteUrl, voteObj).then(function (data, status) {
+     $http.post(voteUrl, vote).then(function (data, status) {
       var activeVote = new Vote(data.data.id, data.data.voteSubjectId, data.data.vote_res, data.data.user_id, data.data.has_been_vote);
-      async.resolve(activeVote);
+      votes.push(activeVote);
+      async.resolve(votes);
     }, function (error) {
       console.error(error);
       async.reject("failed to load cars.json");
@@ -105,6 +100,30 @@ app.factory("voteService", function ($http, $log, $q) {
     return async.promise;
 
   }
+
+
+  function getAllVotes() {
+    var async = $q.defer();
+    $http.get(voteUrl).then(function (response) {
+
+      votes = response.data;
+      // var relevantVote = votes.filter(function (el) {
+      //   return el.committee_id == committee_id;
+      // });
+     
+      async.resolve(votes);
+
+
+    }, function (error) {
+      $log.error(error);
+
+      async.reject("failed to load proposals");
+    });
+
+
+    return async.promise;
+  }
+
 
 
 
@@ -134,6 +153,7 @@ app.factory("voteService", function ($http, $log, $q) {
   return {
 
     getAll: getAll,
+    getAllVotes : getAllVotes,
     addVoteSubject: addVoteSubject,
     addVote: addVote,
     deleteVoteSubject: deleteVoteSubject
