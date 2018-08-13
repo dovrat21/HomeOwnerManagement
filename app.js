@@ -10,7 +10,7 @@ app.config(function($routeProvider) {
       
   })
   .when('/signUp', {
-    templateUrl: 'Login/signUp.html',
+    templateUrl: 'LogIn/signUp.html',
     controller: 'loginCtrl'
   })
   .when('/tenantsList', {
@@ -19,7 +19,7 @@ app.config(function($routeProvider) {
     
   })
   .when('/login', {
-    templateUrl: 'Login/login.html',
+    templateUrl: 'LogIn/login.html',
     controller: 'loginCtrl'
     
   })
