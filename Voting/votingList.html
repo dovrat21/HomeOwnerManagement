@@ -33,7 +33,8 @@
                         </span> {{vote.subject}}
                     </div>
                     <div class="col-xs-12 col-sm-7 col-md-7 sub-title">
-                        {{vote.body}}
+                        {{vote.body}} 
+                        <!-- <span ng-click="drawChart(vote)" style="margin-right:10px;"></span> -->
                         <span ng-click="updateChart(vote)" style="margin-right:10px;">
                             <i class="fas fa-chart-pie"></i>
                         </span>
@@ -58,9 +59,9 @@
         צור נושא להצבעה
     </button>
 
+    <!-- <div id="piechart_3d" style="width: 900px; height: 500px;"></div> -->
 
-
-    <canvas id="pie" class="chart chart-pie" chart-data="updateChart(vote)" chart-labels="labels" chart-options="options">
+    <canvas id="pie" class="chart chart-pie" chart-data="chartData" chart-labels="labels" chart-options="options" style="width:50%; height:50%;margin-top:7%;">
     </canvas>
 
     <div class="modal" id="myModal">

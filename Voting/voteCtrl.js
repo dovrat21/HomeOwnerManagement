@@ -5,6 +5,8 @@ app.controller("voteCtrl", function ($scope,$log, $rootScope, $http, $location, 
   $scope.votes = [];
   $scope.voteIsOver = false;
   $scope.alreadyVote = false;
+  var wasEverLoaded = false;
+  $scope.chartData = [];
 
 
   $scope.labels = ["בעד", "נגד", "נמנע"];
@@ -13,35 +15,39 @@ app.controller("voteCtrl", function ($scope,$log, $rootScope, $http, $location, 
  
 
 
+
+
+
+
+
+
+
   $scope.updateChart = function (vote) {
     var agree = 0;
     var reject = 0;
     var avoid = 0;
-    var allVotes = null;
+  
+    $scope.chartData=null;
     var relevantVote=null;
-
-    
-    // if ($scope.votes.length > 0) {
-     
+ 
        relevantVote = $scope.votes.filter(function (el) {
         return el.committee_id == vote.committee_id;
       });
      
-
-
-
-//  for (var i = 0; i < relevantVote.length; i++) {
-//       if (relevantVote[i].vote_res === "Agree") {
-//         ++agree;
-//       } else if (relevantVote[i].vote_res === "Avoid") {
-//         ++avoid
-//       }
-//       else {
-//         reject++;
-//       }
-//     }
-
-//     return [agree, avoid,reject];
+ for (var i = 0; i < relevantVote.length; i++) {
+      if (relevantVote[i].vote_res === "Agree") {
+        ++agree;
+      } else if (relevantVote[i].vote_res === "Avoid") {
+        ++avoid
+      }
+      else {
+        reject++;
+      }
+    }
+    console.log([agree, avoid,reject]);
+    $scope.chartData = [agree, avoid,reject];
+    // return [agree, avoid,reject];
+    return $scope.chartData;
 
 
   };
@@ -240,23 +246,17 @@ app.controller("voteCtrl", function ($scope,$log, $rootScope, $http, $location, 
     $scope.votesSubjects = responseVotes;
   };
 
+ 
+ 
+ 
   voteService.getAllVotes().then(function (votes) {
     $scope.votes = votes;
   }, function (error) {
     $log.error(error);
   });
-  // $scope.getAllVotes = function () {
-  //   // $scope.currentUser().committee_id
-  //   voteService.getAllVotes().then(function (votes) {
-  //     $scope.votes = votes;
-
-  //   }, function (error) {
-  //     $log.error(error);
-  //   });
-
-
-
-  // };
+  
+  
+  
 
   voteService.getAll($scope.currentUser().committee_id).then(function (votes) {
     $scope.votesSubjects = votes;
