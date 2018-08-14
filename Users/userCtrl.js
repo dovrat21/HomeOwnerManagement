@@ -1,8 +1,7 @@
 
 app.controller("userCtrl", function ($scope,$log, $rootScope, $http, $location, userService) {
 
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
+   
 
 
     $scope.users = [];
